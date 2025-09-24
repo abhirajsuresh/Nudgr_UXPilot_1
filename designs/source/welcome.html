@@ -1,0 +1,284 @@
+<html><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <style>
+      ::-webkit-scrollbar { display: none; }
+      .glow-button {
+          box-shadow: 0 0 20px rgba(70, 78, 255, 0.4);
+      }
+      .gradient-bg {
+          background: linear-gradient(135deg, #1F1F2E 0%, #2A2A3E 100%);
+      }
+      .accent-gradient {
+          background: linear-gradient(135deg, #464EFF 0%, #6C4EE3 100%);
+      }
+  </style>
+  <script>tailwind.config = {
+"theme": {
+  "extend": {
+    "colors": {
+      "dark-bg": "#1F1F2E",
+      "primary-accent": "#464EFF",
+      "secondary-accent": "#6C4EE3"
+    },
+    "fontFamily": {
+      "sans": [
+        "Inter",
+        "system-ui",
+        "sans-serif"
+      ]
+    }
+  }
+}
+};</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"><style>
+    body {
+      font-family: 'Inter', sans-serif !important;
+    }
+    
+    /* Preserve Font Awesome icons */
+    .fa, .fas, .far, .fal, .fab {
+      font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+    }
+  </style><style>
+.highlighted-section {
+  outline: 2px solid #3F20FB;
+  background-color: rgba(63, 32, 251, 0.1);
+}
+
+.edit-button {
+  position: absolute;
+  z-index: 1000;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html, body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style></head><body class="bg-dark-bg text-white overflow-x-hidden font-custom">
+
+  <div id="welcome-screen" class="min-h-screen gradient-bg flex flex-col">
+      
+      <div id="skip-section" class="flex justify-end p-6 pt-12">
+          <button class="text-gray-400 text-sm font-medium tracking-wide">SKIP</button>
+      </div>
+
+      <div id="hero-content" class="flex-1 flex flex-col items-center justify-center px-8 -mt-8">
+          
+          <div id="app-logo" class="mb-6">
+</div>
+
+          <div id="illustration-section" class="mb-12">
+              <div class="relative">
+                  <img class="w-80 h-80 rounded-3xl opacity-90" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/3f630a52ee-8801938f045b5c3afd29.png" alt="minimalist productivity illustration with person meditating next to large clock, dark purple gradient background, modern flat design style">
+                  <div class="absolute inset-0 bg-gradient-to-t from-dark-bg/20 to-transparent rounded-3xl"></div>
+              </div>
+          </div>
+
+          <div id="text-content" class="text-center mb-12 px-4">
+              <h1 class="text-4xl font-bold mb-4 tracking-tight">
+                  <span class="block text-white">NUDGR</span>
+              </h1>
+              <p class="text-xl font-medium text-gray-300 mb-6 leading-relaxed">RECLAIM YOUR ATTENTION</p>
+              <p class="text-base text-gray-400 leading-relaxed max-w-sm mx-auto">
+                  Transform phone distractions into gentle NUDGES that guide you back to DEEP WORK</p>
+          </div>
+
+          <div id="progress-dots" class="flex space-x-3 mb-12">
+              <div class="w-3 h-3 rounded-full bg-primary-accent glow-button"></div>
+              <div class="w-3 h-3 rounded-full bg-gray-600"></div>
+              <div class="w-3 h-3 rounded-full bg-gray-600"></div>
+          </div>
+
+      </div>
+
+      <div id="auth-buttons" class="px-8 pb-12 space-y-4">
+          
+          <button id="btn_google_signin" class="w-full bg-white text-dark-bg font-semibold py-4 px-6 rounded-2xl flex items-center justify-center space-x-3 shadow-lg transition-all duration-300 hover:shadow-xl">
+              <i class="text-xl" data-fa-i2svg=""><svg class="svg-inline--fa fa-google" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512" data-fa-i2svg=""><path fill="currentColor" d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path></svg></i>
+              <span class="text-lg">Continue with Google</span>
+          </button>
+
+          <button id="btn_email_signin" class="w-full bg-gray-800 border border-gray-700 text-white font-semibold py-4 px-6 rounded-2xl flex items-center justify-center space-x-3 transition-all duration-300 hover:bg-gray-700">
+              <i class="text-xl" data-fa-i2svg=""><svg class="svg-inline--fa fa-envelope" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="envelope" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"></path></svg></i>
+              <span class="text-lg">Sign in with Email</span>
+          </button>
+
+          <button id="btn_guest_continue" class="w-full accent-gradient text-white font-bold py-4 px-6 rounded-2xl text-lg glow-button transition-all duration-300 hover:shadow-lg">
+              CONTINUE AS GUEST
+          </button>
+
+          <div id="terms-section" class="text-center pt-4">
+              <p class="text-xs text-gray-500 leading-relaxed">
+                  By continuing, you agree to our 
+                  <span class="text-primary-accent underline cursor-pointer">Terms of Service</span> and 
+                  <span class="text-primary-accent underline cursor-pointer">Privacy Policy</span>
+              </p>
+          </div>
+
+      </div>
+
+      <div id="version-footer" class="text-center pb-8 px-8">
+          <p class="text-xs text-gray-600 font-medium">Version 1.0.2</p>
+      </div>
+
+  </div>
+
+  <div id="feature-preview" class="bg-gray-900/50 py-16 px-8">
+      <div class="max-w-sm mx-auto">
+          <h2 class="text-2xl font-bold text-center mb-8 text-white">HOW NUDGR WORKS</h2>
+          
+          <div id="feature-steps" class="space-y-8">
+              
+              <div class="flex items-start space-x-4">
+                  <div class="w-10 h-10 rounded-full bg-primary-accent flex items-center justify-center flex-shrink-0 mt-1">
+                      <span class="text-white font-bold text-sm">1</span>
+                  </div>
+                  <div>
+                      <h3 class="font-semibold text-white mb-2">Choose Your Images</h3>
+                      <p class="text-gray-400 text-sm leading-relaxed">Select motivational quotes or calming visuals from your personal library</p>
+                  </div>
+              </div>
+
+              <div class="flex items-start space-x-4">
+                  <div class="w-10 h-10 rounded-full bg-secondary-accent flex items-center justify-center flex-shrink-0 mt-1">
+                      <span class="text-white font-bold text-sm">2</span>
+                  </div>
+                  <div>
+                      <h3 class="font-semibold text-white mb-2">Set Custom Timers</h3>
+                      <p class="text-gray-400 text-sm leading-relaxed">Configure deep work duration and reminder intervals that work for you</p>
+                  </div>
+              </div>
+
+              <div class="flex items-start space-x-4">
+                  <div class="w-10 h-10 rounded-full bg-primary-accent flex items-center justify-center flex-shrink-0 mt-1">
+                      <span class="text-white font-bold text-sm">3</span>
+                  </div>
+                  <div>
+                      <h3 class="font-semibold text-white mb-2">Stay Focused</h3>
+                      <p class="text-gray-400 text-sm leading-relaxed">Get gentle nudges when you unlock your phone during focus sessions</p>
+                  </div>
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+  <div id="benefits-section" class="bg-dark-bg py-16 px-8">
+      <div class="max-w-sm mx-auto">
+          <h2 class="text-2xl font-bold text-center mb-12 text-white">WHY CHOOSE NUDGR?</h2>
+          
+          <div id="benefits-grid" class="space-y-6">
+              
+              <div class="bg-gray-800/50 rounded-2xl p-6 border border-gray-700">
+                  <div class="w-12 h-12 rounded-xl bg-primary-accent/20 flex items-center justify-center mb-4">
+                      <i class="text-primary-accent text-xl" data-fa-i2svg=""><svg class="svg-inline--fa fa-target" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="target" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><g class="missing"><path fill="currentColor" d="M156.5,447.7l-12.6,29.5c-18.7-9.5-35.9-21.2-51.5-34.9l22.7-22.7C127.6,430.5,141.5,440,156.5,447.7z M40.6,272H8.5 c1.4,21.2,5.4,41.7,11.7,61.1L50,321.2C45.1,305.5,41.8,289,40.6,272z M40.6,240c1.4-18.8,5.2-37,11.1-54.1l-29.5-12.6 C14.7,194.3,10,216.7,8.5,240H40.6z M64.3,156.5c7.8-14.9,17.2-28.8,28.1-41.5L69.7,92.3c-13.7,15.6-25.5,32.8-34.9,51.5 L64.3,156.5z M397,419.6c-13.9,12-29.4,22.3-46.1,30.4l11.9,29.8c20.7-9.9,39.8-22.6,56.9-37.6L397,419.6z M115,92.4 c13.9-12,29.4-22.3,46.1-30.4l-11.9-29.8c-20.7,9.9-39.8,22.6-56.8,37.6L115,92.4z M447.7,355.5c-7.8,14.9-17.2,28.8-28.1,41.5 l22.7,22.7c13.7-15.6,25.5-32.9,34.9-51.5L447.7,355.5z M471.4,272c-1.4,18.8-5.2,37-11.1,54.1l29.5,12.6 c7.5-21.1,12.2-43.5,13.6-66.8H471.4z M321.2,462c-15.7,5-32.2,8.2-49.2,9.4v32.1c21.2-1.4,41.7-5.4,61.1-11.7L321.2,462z M240,471.4c-18.8-1.4-37-5.2-54.1-11.1l-12.6,29.5c21.1,7.5,43.5,12.2,66.8,13.6V471.4z M462,190.8c5,15.7,8.2,32.2,9.4,49.2h32.1 c-1.4-21.2-5.4-41.7-11.7-61.1L462,190.8z M92.4,397c-12-13.9-22.3-29.4-30.4-46.1l-29.8,11.9c9.9,20.7,22.6,39.8,37.6,56.9 L92.4,397z M272,40.6c18.8,1.4,36.9,5.2,54.1,11.1l12.6-29.5C317.7,14.7,295.3,10,272,8.5V40.6z M190.8,50 c15.7-5,32.2-8.2,49.2-9.4V8.5c-21.2,1.4-41.7,5.4-61.1,11.7L190.8,50z M442.3,92.3L419.6,115c12,13.9,22.3,29.4,30.5,46.1 l29.8-11.9C470,128.5,457.3,109.4,442.3,92.3z M397,92.4l22.7-22.7c-15.6-13.7-32.8-25.5-51.5-34.9l-12.6,29.5 C370.4,72.1,384.4,81.5,397,92.4z"></path><circle fill="currentColor" cx="256" cy="364" r="28"><animate attributeType="XML" repeatCount="indefinite" dur="2s" attributeName="r" values="28;14;28;28;14;28;"></animate><animate attributeType="XML" repeatCount="indefinite" dur="2s" attributeName="opacity" values="1;0;1;1;0;1;"></animate></circle><path fill="currentColor" opacity="1" d="M263.7,312h-16c-6.6,0-12-5.4-12-12c0-71,77.4-63.9,77.4-107.8c0-20-17.8-40.2-57.4-40.2c-29.1,0-44.3,9.6-59.2,28.7 c-3.9,5-11.1,6-16.2,2.4l-13.1-9.2c-5.6-3.9-6.9-11.8-2.6-17.2c21.2-27.2,46.4-44.7,91.2-44.7c52.3,0,97.4,29.8,97.4,80.2 c0,67.6-77.4,63.5-77.4,107.8C275.7,306.6,270.3,312,263.7,312z"><animate attributeType="XML" repeatCount="indefinite" dur="2s" attributeName="opacity" values="1;0;0;0;0;1;"></animate></path><path fill="currentColor" opacity="0" d="M232.5,134.5l7,168c0.3,6.4,5.6,11.5,12,11.5h9c6.4,0,11.7-5.1,12-11.5l7-168c0.3-6.8-5.2-12.5-12-12.5h-23 C237.7,122,232.2,127.7,232.5,134.5z"><animate attributeType="XML" repeatCount="indefinite" dur="2s" attributeName="opacity" values="0;0;1;1;0;0;"></animate></path></g></svg></i>
+                  </div>
+                  <h3 class="font-semibold text-white mb-2">Distraction-First Approach</h3>
+                  <p class="text-gray-400 text-sm leading-relaxed">Interrupts the distraction cycle right when it matters most</p>
+              </div>
+
+              <div class="bg-gray-800/50 rounded-2xl p-6 border border-gray-700">
+                  <div class="w-12 h-12 rounded-xl bg-secondary-accent/20 flex items-center justify-center mb-4">
+                      <i class="text-secondary-accent text-xl" data-fa-i2svg=""><svg class="svg-inline--fa fa-sliders" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sliders" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M0 416c0 17.7 14.3 32 32 32l54.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48L480 448c17.7 0 32-14.3 32-32s-14.3-32-32-32l-246.7 0c-12.3-28.3-40.5-48-73.3-48s-61 19.7-73.3 48L32 384c-17.7 0-32 14.3-32 32zm128 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM320 256a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm32-80c-32.8 0-61 19.7-73.3 48L32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l246.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48l54.7 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-54.7 0c-12.3-28.3-40.5-48-73.3-48zM192 128a32 32 0 1 1 0-64 32 32 0 1 1 0 64zm73.3-64C253 35.7 224.8 16 192 16s-61 19.7-73.3 48L32 64C14.3 64 0 78.3 0 96s14.3 32 32 32l86.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48L480 128c17.7 0 32-14.3 32-32s-14.3-32-32-32L265.3 64z"></path></svg></i>
+                  </div>
+                  <h3 class="font-semibold text-white mb-2">Fully Customizable</h3>
+                  <p class="text-gray-400 text-sm leading-relaxed">Set your own timers and choose personal motivational images</p>
+              </div>
+
+              <div class="bg-gray-800/50 rounded-2xl p-6 border border-gray-700">
+                  <div class="w-12 h-12 rounded-xl bg-primary-accent/20 flex items-center justify-center mb-4">
+                      <i class="text-primary-accent text-xl" data-fa-i2svg=""><svg class="svg-inline--fa fa-chart-line" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chart-line" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z"></path></svg></i>
+                  </div>
+                  <h3 class="font-semibold text-white mb-2">Progress Tracking</h3>
+                  <p class="text-gray-400 text-sm leading-relaxed">Detailed insights on unlock count, reminders, and focus patterns</p>
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+  <div id="testimonial-section" class="bg-gray-900/30 py-16 px-8">
+      <div class="max-w-sm mx-auto text-center">
+          <div class="w-16 h-16 rounded-full mx-auto mb-6 overflow-hidden">
+              <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" alt="User" class="w-full h-full object-cover">
+          </div>
+          <p class="text-gray-300 text-lg leading-relaxed mb-6 italic">
+              "Nudgr helped me reduce phone distractions by 70% in just one week. The gentle reminders work perfectly."
+          </p>
+          <p class="text-white font-semibold">Sarah Chen</p>
+          <p class="text-gray-500 text-sm">Product Designer</p>
+      </div>
+  </div>
+
+  <div id="stats-section" class="bg-dark-bg py-16 px-8">
+      <div class="max-w-sm mx-auto">
+          <div class="grid grid-cols-2 gap-6">
+              
+              <div class="text-center">
+                  <div class="text-3xl font-bold text-primary-accent mb-2">85%</div>
+                  <p class="text-gray-400 text-sm">Focus Improvement</p>
+              </div>
+
+              <div class="text-center">
+                  <div class="text-3xl font-bold text-secondary-accent mb-2">50K+</div>
+                  <p class="text-gray-400 text-sm">Active Users</p>
+              </div>
+
+              <div class="text-center">
+                  <div class="text-3xl font-bold text-primary-accent mb-2">4.8★</div>
+                  <p class="text-gray-400 text-sm">App Store Rating</p>
+              </div>
+
+              <div class="text-center">
+                  <div class="text-3xl font-bold text-secondary-accent mb-2">2M+</div>
+                  <p class="text-gray-400 text-sm">Distractions Prevented</p>
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+  <div id="final-cta" class="bg-gradient-to-t from-primary-accent/10 to-transparent py-16 px-8">
+      <div class="max-w-sm mx-auto text-center">
+          <h2 class="text-2xl font-bold text-white mb-4">READY TO FOCUS?</h2>
+          <p class="text-gray-400 mb-8 leading-relaxed">Join thousands of users who've transformed their productivity with Nudgr</p>
+          
+          <button class="w-full accent-gradient text-white font-bold py-4 px-6 rounded-2xl text-lg glow-button mb-4">
+              START YOUR FOCUS JOURNEY
+          </button>
+          
+          <p class="text-xs text-gray-500">Free to start • No credit card required</p>
+      </div>
+  </div>
+
+
+
+<script>
+document.getElementById('btn_google_signin').addEventListener('click', function() {
+  console.log('nudgr_app_open');
+  setTimeout(() => {
+      console.log('nudgr_onboarding_step_complete', {step: 'auth'});
+      window.location.href = '#checklist';
+  }, 1000);
+});
+
+document.getElementById('btn_email_signin').addEventListener('click', function() {
+  alert('Email sign-in coming in post-MVP');
+});
+
+document.getElementById('btn_guest_continue').addEventListener('click', function() {
+  console.log('nudgr_app_open');
+  window.location.href = '#checklist';
+});
+</script>
+
+<grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></body></html>

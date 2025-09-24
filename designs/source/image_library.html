@@ -1,0 +1,492 @@
+<html><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <style>
+      ::-webkit-scrollbar { display: none; }
+      .glow-button {
+          box-shadow: 0 0 20px rgba(70, 78, 255, 0.4);
+      }
+      .gradient-bg {
+          background: linear-gradient(135deg, #1F1F2E 0%, #2A2A3E 100%);
+      }
+      .accent-gradient {
+          background: linear-gradient(135deg, #464EFF 0%, #6C4EE3 100%);
+      }
+      .image-card {
+          transition: all 0.3s ease;
+      }
+      .image-card:hover {
+          transform: translateY(-2px);
+      }
+      .selection-overlay {
+          background: rgba(70, 78, 255, 0.8);
+      }
+      .upload-area {
+          border: 2px dashed rgba(70, 78, 255, 0.3);
+          transition: all 0.3s ease;
+      }
+      .upload-area:hover {
+          border-color: #464EFF;
+          background: rgba(70, 78, 255, 0.1);
+      }
+  </style>
+  <script>tailwind.config = {
+"theme": {
+  "extend": {
+    "colors": {
+      "dark-bg": "#1F1F2E",
+      "primary-accent": "#464EFF",
+      "secondary-accent": "#6C4EE3"
+    },
+    "fontFamily": {
+      "sans": [
+        "Inter",
+        "system-ui",
+        "sans-serif"
+      ]
+    }
+  }
+}
+};</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"><style>
+    body {
+      font-family: 'Inter', sans-serif !important;
+    }
+    
+    /* Preserve Font Awesome icons */
+    .fa, .fas, .far, .fal, .fab {
+      font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+    }
+  </style><style>
+.highlighted-section {
+  outline: 2px solid #3F20FB;
+  background-color: rgba(63, 32, 251, 0.1);
+}
+
+.edit-button {
+  position: absolute;
+  z-index: 1000;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html, body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style></head>
+<body class="bg-dark-bg text-white overflow-x-hidden font-custom">
+
+  <div id="image-library-screen" class="min-h-screen gradient-bg">
+      
+      <div id="header" class="flex items-center justify-between p-6 pt-12 pb-4">
+          <button id="btn_back" class="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors">
+              <i class="fas fa-arrow-left text-lg"></i>
+              <span class="font-medium">Back</span>
+          </button>
+          <h1 class="text-xl font-bold text-white tracking-tight">IMAGE LIBRARY</h1>
+          <div class="w-16"></div>
+      </div>
+
+      <div id="top-actions" class="flex items-center justify-between px-6 mb-6">
+          <div class="flex items-center space-x-3">
+              <button id="btn_add_images" class="bg-primary-accent hover:bg-blue-600 text-white px-4 py-2 rounded-xl font-semibold flex items-center space-x-2 transition-all glow-button">
+                  <i class="fas fa-plus text-sm"></i>
+                  <span>Add Images</span>
+              </button>
+              <button id="btn_select_all" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-xl font-medium transition-all">
+                  <i class="fas fa-check-square text-sm mr-2"></i>
+                  Select All
+              </button>
+          </div>
+          <button id="btn_delete_selected" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl font-medium opacity-50 cursor-not-allowed transition-all">
+              <i class="fas fa-trash text-sm mr-2"></i>
+              Delete
+          </button>
+      </div>
+
+      <div id="image-count-info" class="px-6 mb-4">
+          <p class="text-gray-400 text-sm">
+              <span id="image-count">0</span> images in your library
+          </p>
+      </div>
+
+      <div id="empty-state" class="flex-1 flex flex-col items-center justify-center px-8 py-16">
+          <div class="w-32 h-32 rounded-2xl bg-gray-800/50 border border-gray-700 flex items-center justify-center mb-8">
+              <i class="fas fa-images text-4xl text-gray-500"></i>
+          </div>
+          <h2 class="text-2xl font-bold text-white mb-4 text-center">NO IMAGES YET</h2>
+          <p class="text-gray-400 text-center mb-8 leading-relaxed max-w-sm">
+              Add motivational images, inspiring quotes, or calming visuals to create your personal nudge library
+          </p>
+          <button id="btn_add_first_images" class="accent-gradient text-white font-bold py-4 px-8 rounded-2xl text-lg glow-button flex items-center space-x-3">
+              <i class="fas fa-plus"></i>
+              <span>ADD YOUR FIRST IMAGES</span>
+          </button>
+      </div>
+
+      <div id="image-grid" class="hidden px-6 pb-24">
+          <div class="grid grid-cols-2 gap-4">
+              
+              <div class="image-card bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700 relative">
+                  <div class="aspect-square relative">
+                      <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/143cd7680f-d78044e8bb9b481260c7.png" alt="motivational quote about focus and productivity, minimalist design, dark background">
+                      <div class="selection-overlay absolute inset-0 hidden items-center justify-center">
+                          <i class="fas fa-check-circle text-white text-2xl"></i>
+                      </div>
+                      <button class="absolute top-2 right-2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center hover:bg-black/70 transition-colors">
+                          <i class="fas fa-ellipsis-v text-white text-sm"></i>
+                      </button>
+                  </div>
+                  <div class="p-4">
+                      <h3 class="text-white font-medium text-sm mb-1 truncate">Focus Quote 1</h3>
+                      <p class="text-gray-400 text-xs">Added Dec 15, 2024</p>
+                  </div>
+              </div>
+
+              <div class="image-card bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700 relative">
+                  <div class="aspect-square relative">
+                      <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/d692abd5ce-2645495ecd434990bdce.png" alt="calming nature scene with mountains and lake, peaceful landscape, soft colors">
+                      <div class="selection-overlay absolute inset-0 hidden items-center justify-center">
+                          <i class="fas fa-check-circle text-white text-2xl"></i>
+                      </div>
+                      <button class="absolute top-2 right-2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center hover:bg-black/70 transition-colors">
+                          <i class="fas fa-ellipsis-v text-white text-sm"></i>
+                      </button>
+                  </div>
+                  <div class="p-4">
+                      <h3 class="text-white font-medium text-sm mb-1 truncate">Mountain View</h3>
+                      <p class="text-gray-400 text-xs">Added Dec 14, 2024</p>
+                  </div>
+              </div>
+
+              <div class="image-card bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700 relative">
+                  <div class="aspect-square relative">
+                      <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/3daabd2649-0b907acca2ef1cff6404.png" alt="inspirational quote about success and determination, modern typography, gradient background">
+                      <div class="selection-overlay absolute inset-0 hidden items-center justify-center">
+                          <i class="fas fa-check-circle text-white text-2xl"></i>
+                      </div>
+                      <button class="absolute top-2 right-2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center hover:bg-black/70 transition-colors">
+                          <i class="fas fa-ellipsis-v text-white text-sm"></i>
+                      </button>
+                  </div>
+                  <div class="p-4">
+                      <h3 class="text-white font-medium text-sm mb-1 truncate">Success Quote</h3>
+                      <p class="text-gray-400 text-xs">Added Dec 13, 2024</p>
+                  </div>
+              </div>
+
+              <div class="image-card bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700 relative">
+                  <div class="aspect-square relative">
+                      <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/18369e13e8-4874c0f9b850e133e400.png" alt="zen garden with stones and sand patterns, meditation and mindfulness theme, peaceful ambiance">
+                      <div class="selection-overlay absolute inset-0 hidden items-center justify-center">
+                          <i class="fas fa-check-circle text-white text-2xl"></i>
+                      </div>
+                      <button class="absolute top-2 right-2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center hover:bg-black/70 transition-colors">
+                          <i class="fas fa-ellipsis-v text-white text-sm"></i>
+                      </button>
+                  </div>
+                  <div class="p-4">
+                      <h3 class="text-white font-medium text-sm mb-1 truncate">Zen Garden</h3>
+                      <p class="text-gray-400 text-xs">Added Dec 12, 2024</p>
+                  </div>
+              </div>
+
+              <div class="image-card bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700 relative">
+                  <div class="aspect-square relative">
+                      <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/e1f067a7d0-25618a3579eeb2d1ac77.png" alt="productivity quote about time management, clean design, professional look">
+                      <div class="selection-overlay absolute inset-0 hidden items-center justify-center">
+                          <i class="fas fa-check-circle text-white text-2xl"></i>
+                      </div>
+                      <button class="absolute top-2 right-2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center hover:bg-black/70 transition-colors">
+                          <i class="fas fa-ellipsis-v text-white text-sm"></i>
+                      </button>
+                  </div>
+                  <div class="p-4">
+                      <h3 class="text-white font-medium text-sm mb-1 truncate">Time Quote</h3>
+                      <p class="text-gray-400 text-xs">Added Dec 11, 2024</p>
+                  </div>
+              </div>
+
+              <div class="image-card bg-gray-800/50 rounded-2xl overflow-hidden border border-gray-700 relative">
+                  <div class="aspect-square relative">
+                      <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/932d035587-257b700d5dd5e56d9fc0.png" alt="minimalist workspace with laptop and coffee, productivity aesthetic, clean and organized">
+                      <div class="selection-overlay absolute inset-0 hidden items-center justify-center">
+                          <i class="fas fa-check-circle text-white text-2xl"></i>
+                      </div>
+                      <button class="absolute top-2 right-2 w-8 h-8 bg-black/50 rounded-full flex items-center justify-center hover:bg-black/70 transition-colors">
+                          <i class="fas fa-ellipsis-v text-white text-sm"></i>
+                      </button>
+                  </div>
+                  <div class="p-4">
+                      <h3 class="text-white font-medium text-sm mb-1 truncate">Workspace</h3>
+                      <p class="text-gray-400 text-xs">Added Dec 10, 2024</p>
+                  </div>
+              </div>
+
+          </div>
+      </div>
+
+      <div id="upload-area" class="hidden mx-6 mb-8">
+          <div class="upload-area rounded-2xl p-8 text-center">
+              <i class="fas fa-cloud-upload-alt text-4xl text-primary-accent mb-4"></i>
+              <h3 class="text-white font-semibold mb-2">Drop images here</h3>
+              <p class="text-gray-400 text-sm mb-4">or tap to select from gallery</p>
+              <p class="text-gray-500 text-xs">Supports JPG, PNG up to 20MB each</p>
+          </div>
+      </div>
+
+      <div id="tips-section" class="mx-6 mb-8 bg-gray-800/30 rounded-2xl p-6 border border-gray-700">
+          <div class="flex items-start space-x-3">
+              <div class="w-8 h-8 bg-secondary-accent/20 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+                  <i class="fas fa-lightbulb text-secondary-accent text-sm"></i>
+              </div>
+              <div>
+                  <h3 class="text-white font-semibold mb-2 text-sm">TIPS FOR BETTER NUDGES</h3>
+                  <ul class="text-gray-400 text-xs space-y-1">
+                      <li>• Choose images that inspire immediate action</li>
+                      <li>• Mix quotes with calming visuals</li>
+                      <li>• Keep your library under 20 images for variety</li>
+                      <li>• Update regularly to maintain effectiveness</li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+
+      <div id="validation-warning" class="hidden mx-6 mb-8 bg-red-900/30 border border-red-700 rounded-2xl p-4">
+          <div class="flex items-start space-x-3">
+              <i class="fas fa-exclamation-triangle text-red-400 text-lg mt-0.5"></i>
+              <div>
+                  <h3 class="text-red-300 font-semibold text-sm mb-1">Minimum Images Required</h3>
+                  <p class="text-red-200 text-xs">Add at least 1 image to complete setup and start your focus sessions.</p>
+              </div>
+          </div>
+      </div>
+
+      <div id="image-detail-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+          <div class="bg-gray-800 rounded-3xl p-6 w-full max-w-sm">
+              <div class="flex items-center justify-between mb-6">
+                  <h2 class="text-xl font-bold text-white">Image Details</h2>
+                  <button id="btn_close_modal" class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center">
+                      <i class="fas fa-times text-white text-sm"></i>
+                  </button>
+              </div>
+              
+              <div class="aspect-square rounded-2xl overflow-hidden mb-6">
+                  <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/836d4bebde-c47a0525090353fe781b.png" alt="selected motivational image preview">
+              </div>
+              
+              <div class="space-y-4">
+                  <div>
+                      <label class="text-gray-400 text-sm block mb-2">Image Name</label>
+                      <input type="text" value="Focus Quote 1" class="w-full bg-gray-700 text-white rounded-xl px-4 py-3 border border-gray-600 focus:border-primary-accent outline-none">
+                  </div>
+                  
+                  <div class="flex space-x-3">
+                      <button class="flex-1 bg-secondary-accent hover:bg-purple-600 text-white py-3 rounded-xl font-semibold transition-all">
+                          <i class="fas fa-edit mr-2"></i>Replace
+                      </button>
+                      <button class="flex-1 bg-red-600 hover:bg-red-700 text-white py-3 rounded-xl font-semibold transition-all">
+                          <i class="fas fa-trash mr-2"></i>Delete
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div id="context-menu" class="hidden fixed bg-gray-800 border border-gray-700 rounded-xl shadow-2xl z-40 py-2 min-w-48">
+          <button class="w-full text-left px-4 py-3 text-white hover:bg-gray-700 flex items-center space-x-3">
+              <i class="fas fa-eye text-primary-accent"></i>
+              <span>View Details</span>
+          </button>
+          <button class="w-full text-left px-4 py-3 text-white hover:bg-gray-700 flex items-center space-x-3">
+              <i class="fas fa-edit text-secondary-accent"></i>
+              <span>Replace Image</span>
+          </button>
+          <button class="w-full text-left px-4 py-3 text-white hover:bg-gray-700 flex items-center space-x-3">
+              <i class="fas fa-copy text-blue-400"></i>
+              <span>Duplicate</span>
+          </button>
+          <hr class="border-gray-700 my-2">
+          <button class="w-full text-left px-4 py-3 text-red-300 hover:bg-gray-700 flex items-center space-x-3">
+              <i class="fas fa-trash text-red-400"></i>
+              <span>Delete</span>
+          </button>
+      </div>
+
+      <div id="bottom-nav" class="fixed bottom-0 left-0 right-0 bg-gray-900/95 backdrop-blur-sm border-t border-gray-800 px-6 py-4">
+          <div class="flex items-center justify-between">
+              <div class="text-center">
+                  <p class="text-gray-400 text-xs mb-1">Images in Library</p>
+                  <p class="text-white font-bold text-lg">0</p>
+              </div>
+              <button id="btn_continue_setup" class="bg-primary-accent hover:bg-blue-600 text-white px-6 py-3 rounded-xl font-semibold transition-all glow-button">
+                  Continue Setup
+              </button>
+          </div>
+      </div>
+
+  </div>
+
+
+
+<script>
+let selectedImages = [];
+let imageLibrary = [];
+
+document.getElementById('btn_back').addEventListener('click', function() {
+  window.history.back();
+});
+
+document.getElementById('btn_add_images').addEventListener('click', function() {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.multiple = true;
+  input.accept = 'image/*';
+  input.addEventListener('change', handleImageUpload);
+  input.click();
+});
+
+document.getElementById('btn_add_first_images').addEventListener('click', function() {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.multiple = true;
+  input.accept = 'image/*';
+  input.addEventListener('change', handleImageUpload);
+  input.click();
+});
+
+document.getElementById('btn_select_all').addEventListener('click', function() {
+  const imageCards = document.querySelectorAll('.image-card');
+  const allSelected = selectedImages.length === imageCards.length;
+  
+  if (allSelected) {
+      selectedImages = [];
+      imageCards.forEach(card => {
+          card.querySelector('.selection-overlay').classList.add('hidden');
+          card.classList.remove('ring-2', 'ring-primary-accent');
+      });
+      this.innerHTML = '<i class="fas fa-check-square text-sm mr-2"></i>Select All';
+  } else {
+      selectedImages = Array.from({length: imageCards.length}, (_, i) => i);
+      imageCards.forEach(card => {
+          card.querySelector('.selection-overlay').classList.remove('hidden');
+          card.classList.add('ring-2', 'ring-primary-accent');
+      });
+      this.innerHTML = '<i class="fas fa-square text-sm mr-2"></i>Deselect All';
+  }
+  
+  updateDeleteButton();
+});
+
+document.getElementById('btn_delete_selected').addEventListener('click', function() {
+  if (selectedImages.length === 0) return;
+  
+  if (confirm(`Delete ${selectedImages.length} selected image(s)?`)) {
+      selectedImages.forEach(index => {
+          imageLibrary.splice(index, 1);
+      });
+      selectedImages = [];
+      updateImageGrid();
+      console.log('nudgr_images_delete', {count: selectedImages.length});
+  }
+});
+
+document.getElementById('btn_continue_setup').addEventListener('click', function() {
+  if (imageLibrary.length === 0) {
+      document.getElementById('validation-warning').classList.remove('hidden');
+      setTimeout(() => {
+          document.getElementById('validation-warning').classList.add('hidden');
+      }, 3000);
+      return;
+  }
+  
+  window.location.href = '#timer-setup';
+});
+
+function handleImageUpload(event) {
+  const files = Array.from(event.target.files);
+  let validFiles = [];
+  
+  files.forEach(file => {
+      if (file.type.startsWith('image/') && file.size <= 20 * 1024 * 1024) {
+          validFiles.push({
+              name: file.name.split('.')[0],
+              date: new Date().toLocaleDateString(),
+              file: file,
+              id: Date.now() + Math.random()
+          });
+      }
+  });
+  
+  if (validFiles.length > 0) {
+      imageLibrary = imageLibrary.concat(validFiles);
+      updateImageGrid();
+      console.log('nudgr_images_add', {count: validFiles.length});
+  }
+  
+  if (files.length !== validFiles.length) {
+      alert(`${files.length - validFiles.length} file(s) were rejected. Please ensure files are images under 20MB.`);
+  }
+}
+
+function updateImageGrid() {
+  const emptyState = document.getElementById('empty-state');
+  const imageGrid = document.getElementById('image-grid');
+  const imageCount = document.getElementById('image-count');
+  const bottomNavCount = document.querySelector('#bottom-nav p.text-white');
+  
+  imageCount.textContent = imageLibrary.length;
+  bottomNavCount.textContent = imageLibrary.length;
+  
+  if (imageLibrary.length === 0) {
+      emptyState.classList.remove('hidden');
+      imageGrid.classList.add('hidden');
+  } else {
+      emptyState.classList.add('hidden');
+      imageGrid.classList.remove('hidden');
+  }
+  
+  updateDeleteButton();
+}
+
+function updateDeleteButton() {
+  const deleteBtn = document.getElementById('btn_delete_selected');
+  if (selectedImages.length > 0) {
+      deleteBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      deleteBtn.classList.add('hover:bg-red-700');
+  } else {
+      deleteBtn.classList.add('opacity-50', 'cursor-not-allowed');
+      deleteBtn.classList.remove('hover:bg-red-700');
+  }
+}
+
+document.addEventListener('click', function(e) {
+  if (e.target.closest('.image-card')) {
+      const card = e.target.closest('.image-card');
+      const index = Array.from(card.parentNode.children).indexOf(card);
+      
+      if (selectedImages.includes(index)) {
+          selectedImages = selectedImages.filter(i => i !== index);
+          card.querySelector('.selection-overlay').classList.add('hidden');
+          card.classList.remove('ring-2', 'ring-primary-accent');
+      } else {
+          selectedImages.push(index);
+          card.querySelector('.selection-overlay').classList.remove('hidden');
+          card.classList.add('ring-2', 'ring-primary-accent');
+      }
+      
+      updateDeleteButton();
+  }
+});
+
+updateImageGrid();
+</script>
+
+</body></html>

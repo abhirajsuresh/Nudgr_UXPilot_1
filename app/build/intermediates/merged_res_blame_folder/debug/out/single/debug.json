@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "com.nudgr.app-merged_res-63:/mipmap-hdpi_ic_launcher.xml.flat",
+        "source": "com.nudgr.app-main-65:/mipmap-hdpi/ic_launcher.xml"
+    },
+    {
+        "merged": "com.nudgr.app-merged_res-63:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.nudgr.app-main-65:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.nudgr.app-merged_res-63:/drawable_ic_notification.xml.flat",
+        "source": "com.nudgr.app-main-65:/drawable/ic_notification.xml"
+    },
+    {
+        "merged": "com.nudgr.app-merged_res-63:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.nudgr.app-main-65:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.nudgr.app-merged_res-63:/mipmap-hdpi_ic_launcher_round.xml.flat",
+        "source": "com.nudgr.app-main-65:/mipmap-hdpi/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.nudgr.app-merged_res-63:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.nudgr.app-main-65:/drawable/ic_launcher_foreground.xml"
+    }
+]

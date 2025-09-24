@@ -1,0 +1,412 @@
+<html><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <style>
+      ::-webkit-scrollbar { display: none; }
+      .glow-button {
+          box-shadow: 0 0 20px rgba(70, 78, 255, 0.4);
+      }
+      .gradient-bg {
+          background: linear-gradient(135deg, #1F1F2E 0%, #2A2A3E 100%);
+      }
+      .accent-gradient {
+          background: linear-gradient(135deg, #464EFF 0%, #6C4EE3 100%);
+      }
+      .permission-granted {
+          background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      }
+      .permission-denied {
+          background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+      }
+      .toggle-switch {
+          transition: all 0.3s ease;
+      }
+      .toggle-switch.active {
+          background: linear-gradient(135deg, #464EFF 0%, #6C4EE3 100%);
+      }
+  </style>
+  <script>tailwind.config = {
+"theme": {
+  "extend": {
+    "colors": {
+      "dark-bg": "#1F1F2E",
+      "primary-accent": "#464EFF",
+      "secondary-accent": "#6C4EE3"
+    },
+    "fontFamily": {
+      "sans": [
+        "Inter",
+        "system-ui",
+        "sans-serif"
+      ]
+    }
+  }
+}
+};</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"><style>
+    body {
+      font-family: 'Inter', sans-serif !important;
+    }
+    
+    /* Preserve Font Awesome icons */
+    .fa, .fas, .far, .fal, .fab {
+      font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+    }
+  </style><style>
+.highlighted-section {
+  outline: 2px solid #3F20FB;
+  background-color: rgba(63, 32, 251, 0.1);
+}
+
+.edit-button {
+  position: absolute;
+  z-index: 1000;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html, body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style></head>
+<body class="bg-dark-bg text-white overflow-x-hidden font-custom">
+
+  <div id="permissions-screen" class="min-h-screen gradient-bg">
+      
+      <div id="header" class="flex items-center justify-between p-6 pt-12">
+          <button id="btn_back" class="text-gray-400 hover:text-white transition-colors">
+              <i class="fas fa-arrow-left text-xl"></i>
+          </button>
+          <h1 class="text-lg font-semibold text-white tracking-wide">PERMISSIONS</h1>
+          <div class="w-6"></div>
+      </div>
+
+      <div id="permissions-content" class="px-6 pb-8">
+          
+          <div id="intro-section" class="mb-8">
+              <div class="text-center mb-6">
+                  <div class="w-16 h-16 rounded-full accent-gradient flex items-center justify-center mx-auto mb-4">
+                      <i class="fas fa-shield-alt text-white text-2xl"></i>
+                  </div>
+                  <h2 class="text-2xl font-bold text-white mb-3">SETUP PERMISSIONS</h2>
+                  <p class="text-gray-400 text-sm leading-relaxed max-w-xs mx-auto">
+                      Grant these permissions to ensure Nudgr works seamlessly during your focus sessions
+                  </p>
+              </div>
+          </div>
+
+          <div id="permissions-list" class="space-y-4 mb-8">
+              
+              <div id="notification-permission" class="bg-gray-800/50 rounded-2xl p-4 border border-gray-700">
+                  <div class="flex items-center justify-between mb-3">
+                      <div class="flex items-center space-x-3">
+                          <div class="w-10 h-10 rounded-xl bg-primary-accent/20 flex items-center justify-center">
+                              <i class="fas fa-bell text-primary-accent text-lg"></i>
+                          </div>
+                          <div>
+                              <h3 class="font-semibold text-white text-sm">Notifications</h3>
+                              <p class="text-gray-400 text-xs">Show focus reminders</p>
+                          </div>
+                      </div>
+                      <div id="notification-status" class="flex items-center space-x-2">
+                          <div class="w-2 h-2 rounded-full bg-yellow-500"></div>
+                          <span class="text-xs text-yellow-400 font-medium">PENDING</span>
+                      </div>
+                  </div>
+                  <button id="btn_request_notifications" class="w-full bg-primary-accent text-white font-semibold py-2 px-4 rounded-xl text-sm glow-button transition-all duration-300">
+                      REQUEST PERMISSION
+                  </button>
+              </div>
+
+              <div id="fullscreen-toggle" class="bg-gray-800/50 rounded-2xl p-4 border border-gray-700">
+                  <div class="flex items-center justify-between mb-3">
+                      <div class="flex items-center space-x-3">
+                          <div class="w-10 h-10 rounded-xl bg-secondary-accent/20 flex items-center justify-center">
+                              <i class="fas fa-expand text-secondary-accent text-lg"></i>
+                          </div>
+                          <div>
+                              <h3 class="font-semibold text-white text-sm">Full-Screen Reminders</h3>
+                              <p class="text-gray-400 text-xs">Show reminders in full-screen mode</p>
+                          </div>
+                      </div>
+                      <div class="toggle-switch w-12 h-6 bg-gray-600 rounded-full relative cursor-pointer" onclick="toggleFullscreen()">
+                          <div class="w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-transform duration-300" id="fullscreen-toggle-btn"></div>
+                      </div>
+                  </div>
+                  <p class="text-xs text-gray-500 leading-relaxed">
+                      When enabled, overlay permission becomes optional
+                  </p>
+              </div>
+
+              <div id="battery-permission" class="bg-gray-800/50 rounded-2xl p-4 border border-gray-700">
+                  <div class="flex items-center justify-between mb-3">
+                      <div class="flex items-center space-x-3">
+                          <div class="w-10 h-10 rounded-xl bg-green-500/20 flex items-center justify-center">
+                              <i class="fas fa-battery-full text-green-400 text-lg"></i>
+                          </div>
+                          <div>
+                              <h3 class="font-semibold text-white text-sm">Battery Optimization</h3>
+                              <p class="text-gray-400 text-xs">Ignore battery optimization</p>
+                          </div>
+                      </div>
+                      <div id="battery-status" class="flex items-center space-x-2">
+                          <div class="w-2 h-2 rounded-full bg-red-500"></div>
+                          <span class="text-xs text-red-400 font-medium">DENIED</span>
+                      </div>
+                  </div>
+                  <button id="btn_battery_settings" class="w-full bg-gray-700 text-white font-semibold py-2 px-4 rounded-xl text-sm transition-all duration-300 hover:bg-gray-600">
+                      OPEN SYSTEM SETTINGS
+                  </button>
+              </div>
+
+              <div id="storage-permission" class="bg-gray-800/50 rounded-2xl p-4 border border-gray-700">
+                  <div class="flex items-center justify-between mb-3">
+                      <div class="flex items-center space-x-3">
+                          <div class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center">
+                              <i class="fas fa-images text-blue-400 text-lg"></i>
+                          </div>
+                          <div>
+                              <h3 class="font-semibold text-white text-sm">Photo Access</h3>
+                              <p class="text-gray-400 text-xs">Import motivational images</p>
+                          </div>
+                      </div>
+                      <div id="storage-status" class="flex items-center space-x-2">
+                          <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                          <span class="text-xs text-green-400 font-medium">GRANTED</span>
+                      </div>
+                  </div>
+                  <button id="btn_test_import" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl text-sm transition-all duration-300 hover:bg-blue-700">
+                      TEST PHOTO IMPORT
+                  </button>
+              </div>
+
+              <div id="device-admin-permission" class="bg-gray-800/50 rounded-2xl p-4 border border-gray-700">
+                  <div class="flex items-center justify-between mb-3">
+                      <div class="flex items-center space-x-3">
+                          <div class="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center">
+                              <i class="fas fa-lock text-purple-400 text-lg"></i>
+                          </div>
+                          <div>
+                              <h3 class="font-semibold text-white text-sm">Device Admin</h3>
+                              <p class="text-gray-400 text-xs">Enable lock phone feature</p>
+                          </div>
+                      </div>
+                      <div id="admin-status" class="flex items-center space-x-2">
+                          <div class="w-2 h-2 rounded-full bg-yellow-500"></div>
+                          <span class="text-xs text-yellow-400 font-medium">OPTIONAL</span>
+                      </div>
+                  </div>
+                  <button id="btn_device_admin" class="w-full bg-purple-600 text-white font-semibold py-2 px-4 rounded-xl text-sm transition-all duration-300 hover:bg-purple-700">
+                      ENABLE DEVICE ADMIN
+                  </button>
+              </div>
+
+          </div>
+
+          <div id="permission-info" class="bg-blue-900/20 border border-blue-700/50 rounded-2xl p-4 mb-8">
+              <div class="flex items-start space-x-3">
+                  <i class="fas fa-info-circle text-blue-400 text-lg mt-0.5"></i>
+                  <div>
+                      <h4 class="font-semibold text-blue-300 text-sm mb-2">Permission Details</h4>
+                      <ul class="text-xs text-gray-400 space-y-1 leading-relaxed">
+                          <li>• Notifications: Required for focus session alerts</li>
+                          <li>• Battery: Prevents Android from killing the app</li>
+                          <li>• Photos: Access your motivational image library</li>
+                          <li>• Device Admin: Enables instant phone lock feature</li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+
+          <div id="permission-summary" class="bg-gray-800/30 rounded-2xl p-4 mb-8">
+              <div class="flex items-center justify-between mb-4">
+                  <h4 class="font-semibold text-white text-sm">Permission Status</h4>
+                  <button id="btn_recheck" class="text-primary-accent text-xs font-medium hover:text-secondary-accent transition-colors">
+                      <i class="fas fa-sync-alt mr-1"></i>RECHECK
+                  </button>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                  <div class="text-center">
+                      <div class="text-2xl font-bold text-green-400 mb-1">1</div>
+                      <p class="text-xs text-gray-400">Granted</p>
+                  </div>
+                  <div class="text-center">
+                      <div class="text-2xl font-bold text-yellow-400 mb-1">2</div>
+                      <p class="text-xs text-gray-400">Pending</p>
+                  </div>
+              </div>
+          </div>
+
+          <div id="action-buttons" class="space-y-4">
+              <button id="btn_done" class="w-full accent-gradient text-white font-bold py-4 px-6 rounded-2xl text-lg glow-button transition-all duration-300">
+                  CONTINUE SETUP
+              </button>
+              
+              <button id="btn_skip_permissions" class="w-full bg-gray-700 text-gray-300 font-semibold py-3 px-6 rounded-2xl text-sm transition-all duration-300 hover:bg-gray-600">
+                  SKIP FOR NOW
+              </button>
+          </div>
+
+          <div id="help-section" class="mt-8 text-center">
+              <p class="text-xs text-gray-500 mb-2">Need help with permissions?</p>
+              <button class="text-primary-accent text-xs font-medium underline">
+                  View Setup Guide
+              </button>
+          </div>
+
+      </div>
+
+  </div>
+
+  <div id="permission-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-6 z-50">
+      <div class="bg-gray-800 rounded-3xl p-6 max-w-sm w-full border border-gray-700">
+          <div class="text-center mb-6">
+              <div class="w-16 h-16 rounded-full bg-primary-accent/20 flex items-center justify-center mx-auto mb-4">
+                  <i class="fas fa-shield-check text-primary-accent text-2xl"></i>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-2">Permission Granted!</h3>
+              <p class="text-gray-400 text-sm">Nudgr can now send you focus reminders</p>
+          </div>
+          <button id="btn_close_modal" class="w-full accent-gradient text-white font-semibold py-3 px-6 rounded-2xl">
+              CONTINUE
+          </button>
+      </div>
+  </div>
+
+
+
+<script>
+let fullscreenEnabled = false;
+let permissions = {
+  notifications: 'pending',
+  battery: 'denied',
+  storage: 'granted',
+  deviceAdmin: 'optional'
+};
+
+function toggleFullscreen() {
+  fullscreenEnabled = !fullscreenEnabled;
+  const toggle = document.getElementById('fullscreen-toggle');
+  const btn = document.getElementById('fullscreen-toggle-btn');
+  
+  if (fullscreenEnabled) {
+      toggle.classList.add('active');
+      btn.style.transform = 'translateX(24px)';
+      document.getElementById('admin-status').innerHTML = '<div class="w-2 h-2 rounded-full bg-gray-500"></div><span class="text-xs text-gray-400 font-medium">HIDDEN</span>';
+  } else {
+      toggle.classList.remove('active');
+      btn.style.transform = 'translateX(0px)';
+      document.getElementById('admin-status').innerHTML = '<div class="w-2 h-2 rounded-full bg-yellow-500"></div><span class="text-xs text-yellow-400 font-medium">OPTIONAL</span>';
+  }
+  
+  console.log('nudgr_fullscreen_toggle', {enabled: fullscreenEnabled});
+}
+
+function updatePermissionStatus(permission, status) {
+  permissions[permission] = status;
+  const statusElement = document.getElementById(`${permission}-status`);
+  
+  switch(status) {
+      case 'granted':
+          statusElement.innerHTML = '<div class="w-2 h-2 rounded-full bg-green-500"></div><span class="text-xs text-green-400 font-medium">GRANTED</span>';
+          console.log('nudgr_permission_granted', {permission: permission});
+          break;
+      case 'denied':
+          statusElement.innerHTML = '<div class="w-2 h-2 rounded-full bg-red-500"></div><span class="text-xs text-red-400 font-medium">DENIED</span>';
+          console.log('nudgr_permission_denied', {permission: permission});
+          break;
+      case 'pending':
+          statusElement.innerHTML = '<div class="w-2 h-2 rounded-full bg-yellow-500"></div><span class="text-xs text-yellow-400 font-medium">PENDING</span>';
+          break;
+  }
+  
+  updateSummary();
+}
+
+function updateSummary() {
+  const granted = Object.values(permissions).filter(status => status === 'granted').length;
+  const pending = Object.values(permissions).filter(status => status === 'pending').length;
+  
+  document.querySelector('#permission-summary .grid .text-green-400').textContent = granted;
+  document.querySelector('#permission-summary .grid div:last-child .text-yellow-400').textContent = pending;
+}
+
+function showModal() {
+  document.getElementById('permission-modal').classList.remove('hidden');
+  document.getElementById('permission-modal').classList.add('flex');
+}
+
+function hideModal() {
+  document.getElementById('permission-modal').classList.add('hidden');
+  document.getElementById('permission-modal').classList.remove('flex');
+}
+
+document.getElementById('btn_back').addEventListener('click', function() {
+  window.history.back();
+});
+
+document.getElementById('btn_request_notifications').addEventListener('click', function() {
+  if ('Notification' in window) {
+      Notification.requestPermission().then(function(permission) {
+          if (permission === 'granted') {
+              updatePermissionStatus('notification', 'granted');
+              showModal();
+          } else {
+              updatePermissionStatus('notification', 'denied');
+          }
+      });
+  }
+});
+
+document.getElementById('btn_battery_settings').addEventListener('click', function() {
+  alert('Opening battery optimization settings...');
+  setTimeout(() => {
+      updatePermissionStatus('battery', 'granted');
+  }, 2000);
+});
+
+document.getElementById('btn_test_import').addEventListener('click', function() {
+  alert('Photo import test successful!');
+  console.log('nudgr_photo_import_test');
+});
+
+document.getElementById('btn_device_admin').addEventListener('click', function() {
+  alert('Requesting device admin permissions...');
+  setTimeout(() => {
+      updatePermissionStatus('deviceAdmin', 'granted');
+      console.log('nudgr_device_admin_enabled');
+  }, 1500);
+});
+
+document.getElementById('btn_recheck').addEventListener('click', function() {
+  console.log('Rechecking permissions...');
+  updatePermissionStatus('notification', 'granted');
+  updatePermissionStatus('battery', 'granted');
+  alert('Permission status updated!');
+});
+
+document.getElementById('btn_done').addEventListener('click', function() {
+  console.log('nudgr_permissions_setup_complete');
+  window.location.href = '#checklist';
+});
+
+document.getElementById('btn_skip_permissions').addEventListener('click', function() {
+  console.log('nudgr_permissions_skipped');
+  window.location.href = '#checklist';
+});
+
+document.getElementById('btn_close_modal').addEventListener('click', function() {
+  hideModal();
+});
+
+updateSummary();
+</script>
+
+</body></html>

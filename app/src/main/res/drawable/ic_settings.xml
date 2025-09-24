@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp"
+    android:viewportWidth="24" android:viewportHeight="24">
+    <!-- outer gear (simplified) -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="@color/gray_400"
+        android:strokeWidth="2"
+        android:strokeLineJoin="round"
+        android:pathData="M12,3l2,1l2,-1l2,2l-1,2l1,2l-1,2l1,2l-2,2l-2,-1l-2,1l-2,-1l-2,1l-2,-2l1,-2l-1,-2l1,-2l-1,-2l2,-2l2,1z"/>
+    <!-- inner hub -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="@color/gray_400"
+        android:strokeWidth="2"
+        android:pathData="M12,10a2,2 0 1,0 0,4a2,2 0 1,0 0,-4z"/>
+</vector>

@@ -1,0 +1,422 @@
+<html><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <style>
+      ::-webkit-scrollbar { display: none; }
+      .glow-button {
+          box-shadow: 0 0 20px rgba(70, 78, 255, 0.4);
+      }
+      .gradient-bg {
+          background: linear-gradient(135deg, #1F1F2E 0%, #2A2A3E 100%);
+      }
+      .accent-gradient {
+          background: linear-gradient(135deg, #464EFF 0%, #6C4EE3 100%);
+      }
+      .checklist-item {
+          transition: all 0.3s ease;
+      }
+      .checklist-item.completed {
+          border-color: #464EFF;
+          background: rgba(70, 78, 255, 0.1);
+      }
+      .pulse-ring {
+          animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+      }
+      @keyframes pulse-ring {
+          0% {
+              transform: scale(0.33);
+          }
+          80%, 100% {
+              transform: scale(1.2);
+              opacity: 0;
+          }
+      }
+  </style>
+  <script>tailwind.config = {
+"theme": {
+  "extend": {
+    "colors": {
+      "dark-bg": "#1F1F2E",
+      "primary-accent": "#464EFF",
+      "secondary-accent": "#6C4EE3"
+    },
+    "fontFamily": {
+      "sans": [
+        "Inter",
+        "system-ui",
+        "sans-serif"
+      ]
+    }
+  }
+}
+};</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"><style>
+    body {
+      font-family: 'Inter', sans-serif !important;
+    }
+    
+    /* Preserve Font Awesome icons */
+    .fa, .fas, .far, .fal, .fab {
+      font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+    }
+  </style><style>
+.highlighted-section {
+  outline: 2px solid #3F20FB;
+  background-color: rgba(63, 32, 251, 0.1);
+}
+
+.edit-button {
+  position: absolute;
+  z-index: 1000;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html, body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style></head>
+<body class="bg-dark-bg text-white overflow-x-hidden font-custom">
+
+  <div id="checklist-screen" class="min-h-screen gradient-bg">
+      
+      <div id="header" class="flex items-center justify-between p-6 pt-12">
+          <button id="btn_back" class="w-10 h-10 rounded-full bg-gray-800/50 flex items-center justify-center border border-gray-700 hover:bg-gray-700 transition-all">
+              <i class="fas fa-arrow-left text-gray-300"></i>
+          </button>
+          <div class="flex-1 text-center">
+              <h1 class="text-lg font-bold text-white tracking-wide">SETUP CHECKLIST</h1>
+          </div>
+          <button class="text-gray-400 text-sm font-medium tracking-wide">SKIP</button>
+      </div>
+
+      <div id="progress-section" class="px-8 mb-8">
+          <div class="flex items-center justify-between mb-4">
+              <span class="text-sm text-gray-400 font-medium">PROGRESS</span>
+              <span id="progress-text" class="text-sm text-primary-accent font-semibold">0 of 3 complete</span>
+          </div>
+          <div class="w-full bg-gray-800 rounded-full h-2">
+              <div id="progress-bar" class="accent-gradient h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+      </div>
+
+      <div id="intro-section" class="px-8 mb-12">
+          <div class="bg-gray-800/30 rounded-2xl p-6 border border-gray-700">
+              <div class="flex items-start space-x-4">
+                  <div class="w-12 h-12 rounded-xl bg-primary-accent/20 flex items-center justify-center flex-shrink-0">
+                      <i class="fas fa-rocket text-primary-accent text-xl"></i>
+                  </div>
+                  <div>
+                      <h2 class="text-lg font-semibold text-white mb-2">Almost Ready!</h2>
+                      <p class="text-gray-400 text-sm leading-relaxed">Complete these quick setup steps to start your first focus session</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div id="checklist-items" class="px-8 space-y-4 mb-12">
+          
+          <div id="checklist-images" class="checklist-item bg-gray-800/30 rounded-2xl p-6 border border-gray-700 cursor-pointer hover:bg-gray-800/50 transition-all">
+              <div class="flex items-center space-x-4">
+                  <div class="relative">
+                      <div id="images-status" class="w-12 h-12 rounded-full bg-gray-700 border-2 border-gray-600 flex items-center justify-center transition-all">
+                          <i class="fas fa-images text-gray-400 text-xl"></i>
+                      </div>
+                      <div id="images-pulse" class="absolute inset-0 rounded-full bg-primary-accent opacity-20 pulse-ring hidden"></div>
+                  </div>
+                  <div class="flex-1">
+                      <h3 class="font-semibold text-white mb-1">Add Images</h3>
+                      <p class="text-gray-400 text-sm">Choose motivational images for your nudges</p>
+                      <div id="images-progress" class="flex items-center mt-2">
+                          <span class="text-xs text-gray-500">Tap to add your first image</span>
+                      </div>
+                  </div>
+                  <div id="images-check" class="w-6 h-6 rounded-full border-2 border-gray-600 hidden items-center justify-center">
+                      <i class="fas fa-check text-white text-xs"></i>
+                  </div>
+              </div>
+          </div>
+
+          <div id="checklist-timers" class="checklist-item bg-gray-800/30 rounded-2xl p-6 border border-gray-700 cursor-pointer hover:bg-gray-800/50 transition-all">
+              <div class="flex items-center space-x-4">
+                  <div class="relative">
+                      <div id="timers-status" class="w-12 h-12 rounded-full bg-gray-700 border-2 border-gray-600 flex items-center justify-center transition-all">
+                          <i class="fas fa-clock text-gray-400 text-xl"></i>
+                      </div>
+                      <div id="timers-pulse" class="absolute inset-0 rounded-full bg-secondary-accent opacity-20 pulse-ring hidden"></div>
+                  </div>
+                  <div class="flex-1">
+                      <h3 class="font-semibold text-white mb-1">Set Timers</h3>
+                      <p class="text-gray-400 text-sm">Configure your focus duration and intervals</p>
+                      <div id="timers-progress" class="flex items-center mt-2">
+                          <span class="text-xs text-gray-500">Minimum 1 minute session required</span>
+                      </div>
+                  </div>
+                  <div id="timers-check" class="w-6 h-6 rounded-full border-2 border-gray-600 hidden items-center justify-center">
+                      <i class="fas fa-check text-white text-xs"></i>
+                  </div>
+              </div>
+          </div>
+
+          <div id="checklist-permissions" class="checklist-item bg-gray-800/30 rounded-2xl p-6 border border-gray-700 cursor-pointer hover:bg-gray-800/50 transition-all">
+              <div class="flex items-center space-x-4">
+                  <div class="relative">
+                      <div id="permissions-status" class="w-12 h-12 rounded-full bg-gray-700 border-2 border-gray-600 flex items-center justify-center transition-all">
+                          <i class="fas fa-shield-alt text-gray-400 text-xl"></i>
+                      </div>
+                      <div id="permissions-pulse" class="absolute inset-0 rounded-full bg-primary-accent opacity-20 pulse-ring hidden"></div>
+                  </div>
+                  <div class="flex-1">
+                      <h3 class="font-semibold text-white mb-1">Grant Permissions</h3>
+                      <p class="text-gray-400 text-sm">Enable notifications and battery optimization</p>
+                      <div id="permissions-progress" class="flex items-center mt-2">
+                          <span class="text-xs text-gray-500">Required for core functionality</span>
+                      </div>
+                  </div>
+                  <div id="permissions-check" class="w-6 h-6 rounded-full border-2 border-gray-600 hidden items-center justify-center">
+                      <i class="fas fa-check text-white text-xs"></i>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+
+      <div id="optional-section" class="px-8 mb-8">
+          <h3 class="text-sm font-semibold text-gray-400 mb-4 uppercase tracking-wide">Optional Setup</h3>
+          
+          <div id="checklist-overlay" class="checklist-item bg-gray-800/20 rounded-2xl p-6 border border-gray-700 cursor-pointer hover:bg-gray-800/40 transition-all">
+              <div class="flex items-center space-x-4">
+                  <div class="w-12 h-12 rounded-full bg-gray-700/50 border-2 border-gray-600 flex items-center justify-center">
+                      <i class="fas fa-mobile-alt text-gray-500 text-xl"></i>
+                  </div>
+                  <div class="flex-1">
+                      <h3 class="font-medium text-gray-300 mb-1">Screen Overlay</h3>
+                      <p class="text-gray-500 text-sm">Enhanced nudge display options</p>
+                  </div>
+                  <div class="w-6 h-6 rounded-full border-2 border-gray-600 flex items-center justify-center">
+                      <i class="fas fa-plus text-gray-500 text-xs"></i>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div id="tips-section" class="px-8 mb-12">
+          <div class="bg-gradient-to-r from-primary-accent/10 to-secondary-accent/10 rounded-2xl p-6 border border-primary-accent/20">
+              <div class="flex items-start space-x-3">
+                  <div class="w-8 h-8 rounded-full bg-primary-accent/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <i class="fas fa-lightbulb text-primary-accent text-sm"></i>
+                  </div>
+                  <div>
+                      <h3 class="font-semibold text-white mb-2 text-sm">Pro Tip</h3>
+                      <p class="text-gray-300 text-xs leading-relaxed">Start with shorter sessions (5-10 minutes) and gradually increase duration as you build focus habits</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div id="action-buttons" class="px-8 pb-12">
+          <button id="btn_continue" class="w-full py-4 px-6 rounded-2xl text-lg font-bold transition-all duration-300 mb-4 opacity-50 cursor-not-allowed bg-gray-700 text-gray-400" disabled="">
+              CONTINUE TO DASHBOARD
+          </button>
+          
+          <div class="flex items-center justify-center space-x-6 text-sm">
+              <button id="btn_help" class="text-gray-400 hover:text-white transition-colors flex items-center space-x-2">
+                  <i class="fas fa-question-circle"></i>
+                  <span>Need Help?</span>
+              </button>
+              <button id="btn_skip_setup" class="text-gray-400 hover:text-white transition-colors flex items-center space-x-2">
+                  <i class="fas fa-forward"></i>
+                  <span>Skip Setup</span>
+              </button>
+          </div>
+      </div>
+
+      <div id="completion-celebration" class="fixed inset-0 bg-dark-bg/90 backdrop-blur-sm flex items-center justify-center hidden z-50">
+          <div class="bg-gray-800 rounded-3xl p-8 mx-8 text-center border border-gray-700 max-w-sm">
+              <div class="w-16 h-16 rounded-full accent-gradient flex items-center justify-center mx-auto mb-6">
+                  <i class="fas fa-check text-white text-2xl"></i>
+              </div>
+              <h2 class="text-2xl font-bold text-white mb-4">Setup Complete!</h2>
+              <p class="text-gray-400 mb-8 leading-relaxed">You're all set to start your first focus session</p>
+              <button id="btn_start_focusing" class="w-full accent-gradient text-white font-bold py-4 px-6 rounded-2xl text-lg glow-button">
+                  START FOCUSING
+              </button>
+          </div>
+      </div>
+
+      <div id="permission-modal" class="fixed inset-0 bg-dark-bg/90 backdrop-blur-sm flex items-end justify-center hidden z-40">
+          <div class="bg-gray-800 rounded-t-3xl p-8 w-full max-w-sm border-t border-gray-700">
+              <div class="w-12 h-1 bg-gray-600 rounded-full mx-auto mb-6"></div>
+              <div class="text-center mb-6">
+                  <div class="w-16 h-16 rounded-full bg-primary-accent/20 flex items-center justify-center mx-auto mb-4">
+                      <i class="fas fa-bell text-primary-accent text-2xl"></i>
+                  </div>
+                  <h3 class="text-xl font-bold text-white mb-2">Enable Notifications</h3>
+                  <p class="text-gray-400 text-sm leading-relaxed">Allow Nudgr to send you focus reminders and session updates</p>
+              </div>
+              <div class="space-y-3">
+                  <button id="btn_allow_notifications" class="w-full accent-gradient text-white font-bold py-4 px-6 rounded-2xl">
+                      Allow Notifications
+                  </button>
+                  <button id="btn_skip_notifications" class="w-full bg-gray-700 text-white font-semibold py-4 px-6 rounded-2xl">
+                      Skip for Now
+                  </button>
+              </div>
+          </div>
+      </div>
+
+  </div>
+
+
+
+<script>
+let appState = {
+  hasAtLeastOneImage: false,
+  hasValidTimers: false,
+  hasCorePermissions: false,
+  overlayGranted: false,
+  fsiCapable: true,
+  completedSteps: 0
+};
+
+function updateProgress() {
+  const totalSteps = 3;
+  const completedSteps = [
+      appState.hasAtLeastOneImage,
+      appState.hasValidTimers, 
+      appState.hasCorePermissions
+  ].filter(Boolean).length;
+  
+  appState.completedSteps = completedSteps;
+  
+  document.getElementById('progress-text').textContent = `${completedSteps} of ${totalSteps} complete`;
+  document.getElementById('progress-bar').style.width = `${(completedSteps / totalSteps) * 100}%`;
+  
+  const continueBtn = document.getElementById('btn_continue');
+  if (completedSteps === totalSteps) {
+      continueBtn.disabled = false;
+      continueBtn.classList.remove('opacity-50', 'cursor-not-allowed', 'bg-gray-700', 'text-gray-400');
+      continueBtn.classList.add('accent-gradient', 'glow-button');
+      continueBtn.textContent = 'CONTINUE TO DASHBOARD';
+  }
+}
+
+function markStepComplete(stepId, statusElement, checkElement, pulseElement) {
+  statusElement.classList.remove('bg-gray-700', 'border-gray-600');
+  statusElement.classList.add('bg-primary-accent', 'border-primary-accent');
+  statusElement.innerHTML = '<i class="fas fa-check text-white text-xl"></i>';
+  
+  checkElement.classList.remove('hidden', 'border-gray-600');
+  checkElement.classList.add('flex', 'bg-primary-accent', 'border-primary-accent');
+  
+  pulseElement.classList.add('hidden');
+  
+  document.getElementById(`checklist-${stepId}`).classList.add('completed');
+  
+  console.log('nudgr_onboarding_step_complete', {step: stepId});
+  updateProgress();
+  
+  if (appState.completedSteps === 3) {
+      setTimeout(() => {
+          document.getElementById('completion-celebration').classList.remove('hidden');
+      }, 500);
+  }
+}
+
+document.getElementById('checklist-images').addEventListener('click', function() {
+  if (!appState.hasAtLeastOneImage) {
+      document.getElementById('images-pulse').classList.remove('hidden');
+      document.getElementById('images-progress').innerHTML = '<span class="text-xs text-primary-accent">Opening image library...</span>';
+      
+      setTimeout(() => {
+          appState.hasAtLeastOneImage = true;
+          markStepComplete('images', 
+              document.getElementById('images-status'),
+              document.getElementById('images-check'),
+              document.getElementById('images-pulse')
+          );
+          document.getElementById('images-progress').innerHTML = '<span class="text-xs text-green-400">✓ 3 images added</span>';
+      }, 1500);
+  }
+});
+
+document.getElementById('checklist-timers').addEventListener('click', function() {
+  if (!appState.hasValidTimers) {
+      document.getElementById('timers-pulse').classList.remove('hidden');
+      document.getElementById('timers-progress').innerHTML = '<span class="text-xs text-secondary-accent">Configuring timers...</span>';
+      
+      setTimeout(() => {
+          appState.hasValidTimers = true;
+          markStepComplete('timers',
+              document.getElementById('timers-status'),
+              document.getElementById('timers-check'),
+              document.getElementById('timers-pulse')
+          );
+          document.getElementById('timers-progress').innerHTML = '<span class="text-xs text-green-400">✓ 25min focus, 5min intervals</span>';
+      }, 2000);
+  }
+});
+
+document.getElementById('checklist-permissions').addEventListener('click', function() {
+  if (!appState.hasCorePermissions) {
+      document.getElementById('permission-modal').classList.remove('hidden');
+  }
+});
+
+document.getElementById('btn_allow_notifications').addEventListener('click', function() {
+  document.getElementById('permission-modal').classList.add('hidden');
+  document.getElementById('permissions-pulse').classList.remove('hidden');
+  document.getElementById('permissions-progress').innerHTML = '<span class="text-xs text-primary-accent">Granting permissions...</span>';
+  
+  setTimeout(() => {
+      appState.hasCorePermissions = true;
+      markStepComplete('permissions',
+          document.getElementById('permissions-status'),
+          document.getElementById('permissions-check'),
+          document.getElementById('permissions-pulse')
+      );
+      document.getElementById('permissions-progress').innerHTML = '<span class="text-xs text-green-400">✓ All permissions granted</span>';
+  }, 1000);
+});
+
+document.getElementById('btn_skip_notifications').addEventListener('click', function() {
+  document.getElementById('permission-modal').classList.add('hidden');
+});
+
+document.getElementById('btn_continue').addEventListener('click', function() {
+  if (!this.disabled) {
+      console.log('nudgr_onboarding_complete');
+      window.location.href = '#dashboard';
+  }
+});
+
+document.getElementById('btn_start_focusing').addEventListener('click', function() {
+  console.log('nudgr_onboarding_complete');
+  window.location.href = '#dashboard';
+});
+
+document.getElementById('btn_back').addEventListener('click', function() {
+  history.back();
+});
+
+document.getElementById('btn_help').addEventListener('click', function() {
+  alert('Need help? Contact us at support@nudgr.app');
+});
+
+document.getElementById('btn_skip_setup').addEventListener('click', function() {
+  if (confirm('Skip setup? You can complete these steps later in settings.')) {
+      window.location.href = '#dashboard';
+  }
+});
+
+updateProgress();
+</script>
+
+</body></html>

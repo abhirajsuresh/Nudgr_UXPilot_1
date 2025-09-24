@@ -1,0 +1,392 @@
+<html><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <style>
+      ::-webkit-scrollbar { display: none; }
+      .glow-button {
+          box-shadow: 0 0 20px rgba(70, 78, 255, 0.4);
+      }
+      .glow-ring {
+          filter: drop-shadow(0 0 10px rgba(70, 78, 255, 0.6));
+      }
+      .gradient-bg {
+          background: linear-gradient(135deg, #1F1F2E 0%, #2A2A3E 100%);
+      }
+      .accent-gradient {
+          background: linear-gradient(135deg, #464EFF 0%, #6C4EE3 100%);
+      }
+      .pulse-animation {
+          animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.7; }
+      }
+      .timer-circle {
+          transform: rotate(-90deg);
+      }
+  </style>
+  <script>tailwind.config = {
+"theme": {
+  "extend": {
+    "colors": {
+      "dark-bg": "#1F1F2E",
+      "primary-accent": "#464EFF",
+      "secondary-accent": "#6C4EE3"
+    },
+    "fontFamily": {
+      "sans": [
+        "Inter",
+        "system-ui",
+        "sans-serif"
+      ]
+    }
+  }
+}
+};</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"><style>
+    body {
+      font-family: 'Inter', sans-serif !important;
+    }
+    
+    /* Preserve Font Awesome icons */
+    .fa, .fas, .far, .fal, .fab {
+      font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+    }
+  </style><style>
+.highlighted-section {
+  outline: 2px solid #3F20FB;
+  background-color: rgba(63, 32, 251, 0.1);
+}
+
+.edit-button {
+  position: absolute;
+  z-index: 1000;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html, body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style></head>
+<body class="bg-dark-bg text-white overflow-x-hidden font-custom">
+
+  <div id="dashboard-screen" class="min-h-screen gradient-bg">
+      
+      <div id="header" class="flex items-center justify-between p-6 pt-12">
+          <div class="flex items-center space-x-3">
+              <div class="w-8 h-8 rounded-full accent-gradient flex items-center justify-center">
+                  <i class="fas fa-brain text-white text-sm"></i>
+              </div>
+              <span class="font-bold text-lg">NUDGR</span>
+          </div>
+          <div class="flex items-center space-x-4">
+              <i class="fas fa-bell text-gray-400 text-lg"></i>
+              <i class="fas fa-cog text-gray-400 text-lg"></i>
+          </div>
+      </div>
+
+      <div id="session-status-bar" class="px-6 mb-8">
+          <div class="bg-green-500/20 border border-green-500/30 rounded-2xl p-4 flex items-center space-x-3">
+              <div class="w-3 h-3 rounded-full bg-green-500 pulse-animation"></div>
+              <span class="text-green-400 font-medium text-sm">SESSION ACTIVE</span>
+          </div>
+      </div>
+
+      <div id="session-running-block" class="px-6 mb-8">
+          <div class="bg-gray-800/50 border border-gray-700 rounded-3xl p-8">
+              
+              <div id="task-label" class="mb-8">
+                  <div class="bg-secondary-accent rounded-full px-4 py-2 flex items-center justify-center space-x-2 max-w-fit mx-auto">
+                      <span class="text-white font-medium text-sm">Deep Work Session</span>
+                      <i class="fas fa-pencil text-white text-xs"></i>
+                  </div>
+              </div>
+
+              <div id="timer-display" class="relative mb-8 flex items-center justify-center">
+                  <div class="relative w-64 h-64">
+                      <svg class="w-full h-full timer-circle glow-ring" viewBox="0 0 100 100">
+                          <circle cx="50" cy="50" r="45" stroke="rgba(70, 78, 255, 0.2)" stroke-width="2" fill="none"></circle>
+                          <circle cx="50" cy="50" r="45" stroke="url(#gradient)" stroke-width="3" fill="none" stroke-dasharray="283" stroke-dashoffset="85" stroke-linecap="round"></circle>
+                          <defs>
+                              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                  <stop offset="0%" style="stop-color:#464EFF"></stop>
+                                  <stop offset="100%" style="stop-color:#6C4EE3"></stop>
+                              </linearGradient>
+                          </defs>
+                      </svg>
+                      <div class="absolute inset-0 flex flex-col items-center justify-center">
+                          <div class="text-4xl font-bold text-white mb-2" id="remaining-time">23:42</div>
+                          <div class="text-sm text-gray-400 font-medium">REMAINING</div>
+                      </div>
+                  </div>
+              </div>
+
+              <div id="session-stats" class="grid grid-cols-2 gap-6 mb-8">
+                  
+                  <div class="bg-gray-900/50 rounded-2xl p-4 text-center">
+                      <div class="text-2xl font-bold text-primary-accent mb-1" id="unlock-count">7</div>
+                      <div class="text-xs text-gray-400 font-medium uppercase tracking-wide">Phone Unlocks</div>
+                  </div>
+
+                  <div class="bg-gray-900/50 rounded-2xl p-4 text-center">
+                      <div class="text-2xl font-bold text-secondary-accent mb-1" id="reminders-shown">3</div>
+                      <div class="text-xs text-gray-400 font-medium uppercase tracking-wide">Reminders Shown</div>
+                  </div>
+
+              </div>
+
+              <div id="next-reminder" class="bg-primary-accent/10 border border-primary-accent/30 rounded-2xl p-4 mb-8 text-center">
+                  <div class="text-sm text-gray-300 mb-2">Next reminder in:</div>
+                  <div class="text-2xl font-bold text-primary-accent" id="next-reminder-time">02:15</div>
+                  <div class="text-xs text-gray-500 mt-1">(while unlocked)</div>
+              </div>
+
+              <div id="session-controls" class="flex space-x-4">
+                  
+                  <button id="pause-btn" class="flex-1 bg-yellow-500/20 border border-yellow-500/30 text-yellow-400 font-semibold py-4 rounded-2xl flex items-center justify-center space-x-2 transition-all duration-300 hover:bg-yellow-500/30">
+                      <i class="fas fa-pause text-lg"></i>
+                      <span>PAUSE</span>
+                  </button>
+
+                  <button id="end-btn" class="flex-1 bg-red-500/20 border border-red-500/30 text-red-400 font-semibold py-4 rounded-2xl flex items-center justify-center space-x-2 transition-all duration-300 hover:bg-red-500/30">
+                      <i class="fas fa-stop text-lg"></i>
+                      <span>END</span>
+                  </button>
+
+              </div>
+
+          </div>
+      </div>
+
+      <div id="quick-stats-section" class="px-6 mb-8">
+          <h3 class="text-lg font-semibold text-white mb-4">TODAY'S PROGRESS</h3>
+          <div class="grid grid-cols-3 gap-4">
+              
+              <div class="bg-gray-800/50 rounded-2xl p-4 text-center border border-gray-700">
+                  <div class="text-xl font-bold text-white mb-1">2h 15m</div>
+                  <div class="text-xs text-gray-400 uppercase tracking-wide">Focused Time</div>
+              </div>
+
+              <div class="bg-gray-800/50 rounded-2xl p-4 text-center border border-gray-700">
+                  <div class="text-xl font-bold text-white mb-1">12</div>
+                  <div class="text-xs text-gray-400 uppercase tracking-wide">Total Unlocks</div>
+              </div>
+
+              <div class="bg-gray-800/50 rounded-2xl p-4 text-center border border-gray-700">
+                  <div class="text-xl font-bold text-white mb-1">8</div>
+                  <div class="text-xs text-gray-400 uppercase tracking-wide">Nudges Shown</div>
+              </div>
+
+          </div>
+      </div>
+
+      <div id="recent-sessions" class="px-6 mb-8">
+          <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-semibold text-white">RECENT SESSIONS</h3>
+              <button class="text-primary-accent text-sm font-medium">View All</button>
+          </div>
+          
+          <div class="space-y-3">
+              
+              <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-4 flex items-center justify-between">
+                  <div class="flex items-center space-x-3">
+                      <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+                          <i class="fas fa-check text-green-500 text-sm"></i>
+                      </div>
+                      <div>
+                          <div class="text-white font-medium text-sm">Deep Work</div>
+                          <div class="text-gray-400 text-xs">45 min • 3 unlocks</div>
+                      </div>
+                  </div>
+                  <div class="text-gray-400 text-xs">2h ago</div>
+              </div>
+
+              <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-4 flex items-center justify-between">
+                  <div class="flex items-center space-x-3">
+                      <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+                          <i class="fas fa-check text-green-500 text-sm"></i>
+                      </div>
+                      <div>
+                          <div class="text-white font-medium text-sm">Study Session</div>
+                          <div class="text-gray-400 text-xs">30 min • 1 unlock</div>
+                      </div>
+                  </div>
+                  <div class="text-gray-400 text-xs">5h ago</div>
+              </div>
+
+              <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-4 flex items-center justify-between">
+                  <div class="flex items-center space-x-3">
+                      <div class="w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center">
+                          <i class="fas fa-times text-red-500 text-sm"></i>
+                      </div>
+                      <div>
+                          <div class="text-white font-medium text-sm">Writing Time</div>
+                          <div class="text-gray-400 text-xs">15 min • 8 unlocks</div>
+                      </div>
+                  </div>
+                  <div class="text-gray-400 text-xs">Yesterday</div>
+              </div>
+
+          </div>
+      </div>
+
+      <div id="motivational-section" class="px-6 mb-8">
+          <div class="bg-gradient-to-r from-primary-accent/20 to-secondary-accent/20 border border-primary-accent/30 rounded-3xl p-6 text-center">
+              <div class="w-12 h-12 rounded-full bg-primary-accent/30 flex items-center justify-center mx-auto mb-4">
+                  <i class="fas fa-trophy text-primary-accent text-xl"></i>
+              </div>
+              <h3 class="text-white font-semibold mb-2">Great Focus Today!</h3>
+              <p class="text-gray-300 text-sm leading-relaxed">You've reduced distractions by 65% compared to yesterday. Keep it up!</p>
+          </div>
+      </div>
+
+      <div id="insights-preview" class="px-6 mb-8">
+          <div class="flex items-center justify-between mb-4">
+              <h3 class="text-lg font-semibold text-white">INSIGHTS</h3>
+              <button class="text-primary-accent text-sm font-medium">View Details</button>
+          </div>
+          
+          <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-6">
+              <div class="flex items-center justify-between mb-4">
+                  <span class="text-gray-400 text-sm">Focus Score</span>
+                  <span class="text-white font-semibold">8.2/10</span>
+              </div>
+              <div class="w-full bg-gray-700 rounded-full h-2 mb-4">
+                  <div class="bg-gradient-to-r from-primary-accent to-secondary-accent h-2 rounded-full" style="width: 82%"></div>
+              </div>
+              <div class="grid grid-cols-2 gap-4 text-center">
+                  <div>
+                      <div class="text-lg font-bold text-primary-accent">4.2h</div>
+                      <div class="text-xs text-gray-400">Avg Session</div>
+                  </div>
+                  <div>
+                      <div class="text-lg font-bold text-secondary-accent">18%</div>
+                      <div class="text-xs text-gray-400">Distraction Rate</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div id="bottom-navigation" class="fixed bottom-0 left-0 right-0 bg-gray-900/95 backdrop-blur-sm border-t border-gray-700 px-6 py-4">
+          <div class="flex items-center justify-around">
+              
+              <button class="flex flex-col items-center space-y-1">
+                  <i class="fas fa-home text-primary-accent text-xl"></i>
+                  <span class="text-xs text-primary-accent font-medium">Dashboard</span>
+              </button>
+
+              <button class="flex flex-col items-center space-y-1">
+                  <i class="fas fa-play text-gray-400 text-xl"></i>
+                  <span class="text-xs text-gray-400">Start</span>
+              </button>
+
+              <button class="flex flex-col items-center space-y-1">
+                  <i class="fas fa-chart-bar text-gray-400 text-xl"></i>
+                  <span class="text-xs text-gray-400">Analytics</span>
+              </button>
+
+              <button class="flex flex-col items-center space-y-1">
+                  <i class="fas fa-images text-gray-400 text-xl"></i>
+                  <span class="text-xs text-gray-400">Gallery</span>
+              </button>
+
+              <button class="flex flex-col items-center space-y-1">
+                  <i class="fas fa-user text-gray-400 text-xl"></i>
+                  <span class="text-xs text-gray-400">Profile</span>
+              </button>
+
+          </div>
+      </div>
+
+      <div class="pb-20"></div>
+
+  </div>
+
+
+
+<script>
+let sessionRunning = true;
+let remainingSeconds = 1422; // 23:42
+let nextReminderSeconds = 135; // 2:15
+let unlockCount = 7;
+let remindersShown = 3;
+let isPaused = false;
+
+function formatTime(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+}
+
+function updateTimers() {
+  if (!isPaused && sessionRunning) {
+      remainingSeconds--;
+      nextReminderSeconds--;
+      
+      document.getElementById('remaining-time').textContent = formatTime(remainingSeconds);
+      document.getElementById('next-reminder-time').textContent = formatTime(nextReminderSeconds);
+      
+      // Update progress circle
+      const progress = (1422 - remainingSeconds) / 1422 * 283;
+      document.querySelector('circle[stroke-dashoffset]').setAttribute('stroke-dashoffset', 283 - progress);
+      
+      if (nextReminderSeconds <= 0) {
+          nextReminderSeconds = 180; // Reset to 3 minutes
+          remindersShown++;
+          document.getElementById('reminders-shown').textContent = remindersShown;
+      }
+      
+      if (remainingSeconds <= 0) {
+          sessionRunning = false;
+          alert('Session Complete!');
+      }
+  }
+}
+
+document.getElementById('pause-btn').addEventListener('click', function() {
+  isPaused = !isPaused;
+  const btn = this;
+  if (isPaused) {
+      btn.innerHTML = '<i class="fas fa-play text-lg"></i><span>RESUME</span>';
+      btn.className = btn.className.replace('yellow-500', 'green-500');
+  } else {
+      btn.innerHTML = '<i class="fas fa-pause text-lg"></i><span>PAUSE</span>';
+      btn.className = btn.className.replace('green-500', 'yellow-500');
+  }
+});
+
+document.getElementById('end-btn').addEventListener('click', function() {
+  if (confirm('Are you sure you want to end this session?')) {
+      sessionRunning = false;
+      alert('Session ended. Great work!');
+  }
+});
+
+// Simulate phone unlock detection
+document.addEventListener('visibilitychange', function() {
+  if (document.hidden) {
+      isPaused = true;
+      console.log('Screen locked - pausing timer');
+  } else {
+      if (sessionRunning) {
+          unlockCount++;
+          document.getElementById('unlock-count').textContent = unlockCount;
+          isPaused = false;
+          console.log('Screen unlocked - resuming timer');
+      }
+  }
+});
+
+setInterval(updateTimers, 1000);
+</script>
+
+</body></html>

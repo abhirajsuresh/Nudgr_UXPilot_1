@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/permissions_screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_screen_gradient"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header -->
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="24dp"
+            android:paddingBottom="16dp">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_circle_muted"
+                android:src="@drawable/ic_arrow_back"
+                android:tint="@color/gray_400" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="PERMISSIONS"
+                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                android:fontFamily="@font/inter_semibold" />
+
+            <View android:layout_width="40dp" android:layout_height="40dp"/>
+        </LinearLayout>
+
+        <!-- Intro -->
+        <LinearLayout
+            android:id="@+id/intro_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <FrameLayout
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/btn_accent_gradient"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:text="SETUP PERMISSIONS"
+                android:textColor="@android:color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:gravity="center" />
+
+            <TextView
+                android:text="Grant these permissions to ensure Nudgr works seamlessly during your focus sessions"
+                android:textColor="@color/gray_400"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"/>
+        </LinearLayout>
+
+        <!-- Permission cards -->
+        <LinearLayout
+            android:id="@+id/permissions_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:divider="?android:attr/dividerHorizontal"
+            android:showDividers="middle"
+            android:dividerPadding="8dp">
+
+            <!-- Notification -->
+            <include layout="@layout/item_permission_notification"/>
+            <!-- Fullscreen toggle -->
+            <include layout="@layout/item_permission_fullscreen"/>
+            <!-- Battery -->
+            <include layout="@layout/item_permission_battery"/>
+            <!-- Storage -->
+            <include layout="@layout/item_permission_storage"/>
+            <!-- Device Admin -->
+            <include layout="@layout/item_permission_admin"/>
+        </LinearLayout>
+
+        <!-- Permission info -->
+        <LinearLayout
+            android:id="@+id/permission_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card_blur"
+            android:padding="16dp"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:text="Permission Details"
+                android:textColor="@color/blue_300"
+                android:textStyle="bold"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:text="• Notifications: Required for focus session alerts\n• Battery: Prevents Android from killing the app\n• Photos: Access your motivational image library\n• Device Admin: Enables instant phone lock feature"
+                android:textColor="@color/gray_400"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <!-- Permission Summary -->
+        <LinearLayout
+            android:id="@+id/permission_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card_neutral"
+            android:padding="16dp"
+            android:layout_marginTop="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="space_between"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="Permission Status"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+
+                <Button
+                    android:id="@+id/btn_recheck"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RECHECK"
+                    android:textSize="12sp"
+                    android:textColor="@color/primary_accent"
+                    android:background="@android:color/transparent"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="8dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:text="1"
+                        android:textColor="@color/success"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:text="Granted"
+                        android:textColor="@color/gray_400"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:text="2"
+                        android:textColor="@color/warning"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:text="Pending"
+                        android:textColor="@color/gray_400"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Action Buttons -->
+        <LinearLayout
+            android:id="@+id/action_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp">
+
+            <Button
+                android:id="@+id/btn_done"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CONTINUE SETUP"
+                android:textAllCaps="false"
+                android:background="@drawable/btn_accent_gradient"
+                android:textColor="@android:color/white"
+                android:fontFamily="@font/inter_bold"
+                android:layout_marginBottom="8dp"/>
+
+            <Button
+                android:id="@+id/btn_skip_permissions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SKIP FOR NOW"
+                android:textAllCaps="false"
+                android:background="@drawable/bg_card_neutral"
+                android:textColor="@color/gray_300"/>
+        </LinearLayout>
+
+        <!-- Help -->
+        <LinearLayout
+            android:id="@+id/help_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:text="Need help with permissions?"
+                android:textColor="@color/gray_500"
+                android:textSize="12sp"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View Setup Guide"
+                android:textAllCaps="false"
+                android:background="@android:color/transparent"
+                android:textColor="@color/primary_accent"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,426 @@
+<html><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <style>
+      ::-webkit-scrollbar { display: none; }
+      .glow-button {
+          box-shadow: 0 0 20px rgba(70, 78, 255, 0.4);
+      }
+      .gradient-bg {
+          background: linear-gradient(135deg, #1F1F2E 0%, #2A2A3E 100%);
+      }
+      .accent-gradient {
+          background: linear-gradient(135deg, #464EFF 0%, #6C4EE3 100%);
+      }
+      .input-glow {
+          box-shadow: 0 0 0 2px rgba(70, 78, 255, 0.3);
+      }
+      .error-glow {
+          box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.3);
+      }
+  </style>
+  <script>tailwind.config = {
+"theme": {
+  "extend": {
+    "colors": {
+      "dark-bg": "#1F1F2E",
+      "primary-accent": "#464EFF",
+      "secondary-accent": "#6C4EE3"
+    },
+    "fontFamily": {
+      "sans": [
+        "Inter",
+        "system-ui",
+        "sans-serif"
+      ]
+    }
+  }
+}
+};</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"><style>
+    body {
+      font-family: 'Inter', sans-serif !important;
+    }
+    
+    /* Preserve Font Awesome icons */
+    .fa, .fas, .far, .fal, .fab {
+      font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+    }
+  </style><style>
+.highlighted-section {
+  outline: 2px solid #3F20FB;
+  background-color: rgba(63, 32, 251, 0.1);
+}
+
+.edit-button {
+  position: absolute;
+  z-index: 1000;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html, body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style></head>
+<body class="bg-dark-bg text-white overflow-x-hidden font-custom">
+
+  <div id="timer-setup-screen" class="min-h-screen gradient-bg">
+      
+      <div id="header" class="flex items-center justify-between p-6 pt-12">
+          <button id="btn_back" class="w-10 h-10 rounded-full bg-gray-800/50 border border-gray-700 flex items-center justify-center">
+              <i class="fas fa-arrow-left text-gray-300"></i>
+          </button>
+          <h1 class="text-lg font-bold text-white tracking-wide">TIMER SETUP</h1>
+          <div class="w-10"></div>
+      </div>
+
+      <div id="setup-content" class="px-8 pb-32">
+          
+          <div id="intro-section" class="text-center mb-12">
+              <div class="w-20 h-20 rounded-full accent-gradient flex items-center justify-center mx-auto mb-6">
+                  <i class="fas fa-clock text-white text-2xl"></i>
+              </div>
+              <h2 class="text-2xl font-bold text-white mb-4">CONFIGURE YOUR FOCUS</h2>
+              <p class="text-gray-400 leading-relaxed max-w-sm mx-auto">
+                  Set your deep work duration and reminder intervals for optimal focus sessions
+              </p>
+          </div>
+
+          <div id="duration-section" class="mb-12">
+              <div class="bg-gray-800/30 rounded-2xl p-6 border border-gray-700">
+                  <div class="flex items-center space-x-3 mb-6">
+                      <div class="w-8 h-8 rounded-lg bg-primary-accent/20 flex items-center justify-center">
+                          <i class="fas fa-hourglass-half text-primary-accent text-sm"></i>
+                      </div>
+                      <h3 class="text-lg font-semibold text-white">Deep Work Duration</h3>
+                  </div>
+                  
+                  <div id="duration-inputs" class="grid grid-cols-2 gap-4 mb-4">
+                      <div>
+                          <label class="block text-sm font-medium text-gray-400 mb-2">Hours</label>
+                          <div class="relative">
+                              <input type="number" id="duration_hours" value="4" min="0" max="12" class="w-full bg-gray-900/50 border border-gray-600 rounded-xl px-4 py-3 text-white text-lg font-medium focus:border-primary-accent focus:outline-none transition-all duration-300">
+                              <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">hrs</span>
+                          </div>
+                      </div>
+                      <div>
+                          <label class="block text-sm font-medium text-gray-400 mb-2">Minutes</label>
+                          <div class="relative">
+                              <input type="number" id="duration_minutes" value="0" min="0" max="59" class="w-full bg-gray-900/50 border border-gray-600 rounded-xl px-4 py-3 text-white text-lg font-medium focus:border-primary-accent focus:outline-none transition-all duration-300">
+                              <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">min</span>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div id="seconds-toggle" class="flex items-center justify-between mb-4">
+                      <span class="text-sm text-gray-400">Include seconds</span>
+                      <button id="toggle_seconds" class="w-12 h-6 bg-gray-600 rounded-full relative transition-all duration-300">
+                          <div class="w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-all duration-300"></div>
+                      </button>
+                  </div>
+
+                  <div id="seconds-input" class="hidden">
+                      <label class="block text-sm font-medium text-gray-400 mb-2">Seconds</label>
+                      <div class="relative">
+                          <input type="number" id="duration_seconds" value="0" min="0" max="59" class="w-full bg-gray-900/50 border border-gray-600 rounded-xl px-4 py-3 text-white text-lg font-medium focus:border-primary-accent focus:outline-none transition-all duration-300">
+                          <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">sec</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div id="interval-section" class="mb-8">
+              <div class="bg-gray-800/30 rounded-2xl p-6 border border-gray-700">
+                  <div class="flex items-center space-x-3 mb-6">
+                      <div class="w-8 h-8 rounded-lg bg-secondary-accent/20 flex items-center justify-center">
+                          <i class="fas fa-bell text-secondary-accent text-sm"></i>
+                      </div>
+                      <h3 class="text-lg font-semibold text-white">Reminder Interval</h3>
+                  </div>
+                  
+                  <div id="interval-inputs" class="grid grid-cols-2 gap-4">
+                      <div>
+                          <label class="block text-sm font-medium text-gray-400 mb-2">Minutes</label>
+                          <div class="relative">
+                              <input type="number" id="interval_minutes" value="2" min="0" max="59" class="w-full bg-gray-900/50 border border-gray-600 rounded-xl px-4 py-3 text-white text-lg font-medium focus:border-secondary-accent focus:outline-none transition-all duration-300">
+                              <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">min</span>
+                          </div>
+                      </div>
+                      <div>
+                          <label class="block text-sm font-medium text-gray-400 mb-2">Seconds</label>
+                          <div class="relative">
+                              <input type="number" id="interval_seconds" value="0" min="0" max="59" class="w-full bg-gray-900/50 border border-gray-600 rounded-xl px-4 py-3 text-white text-lg font-medium focus:border-secondary-accent focus:outline-none transition-all duration-300">
+                              <span class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">sec</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div id="validation-helper" class="mb-8">
+              <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4">
+                  <div class="flex items-start space-x-3">
+                      <i class="fas fa-info-circle text-amber-400 mt-0.5"></i>
+                      <div>
+                          <p class="text-amber-200 text-sm font-medium mb-1">Timer Requirements</p>
+                          <p class="text-amber-300/80 text-xs leading-relaxed">
+                              Interval must be less than duration. Minimum duration: 1 minute. Minimum interval: 10 seconds.
+                          </p>
+                      </div>
+                  </div>
+              </div>
+              
+              <div id="error-message" class="hidden mt-4 bg-red-500/10 border border-red-500/30 rounded-xl p-4">
+                  <div class="flex items-start space-x-3">
+                      <i class="fas fa-exclamation-triangle text-red-400 mt-0.5"></i>
+                      <div>
+                          <p class="text-red-200 text-sm font-medium mb-1">Invalid Configuration</p>
+                          <p id="error-text" class="text-red-300/80 text-xs leading-relaxed"></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div id="preset-suggestions" class="mb-12">
+              <h4 class="text-sm font-medium text-gray-400 mb-4">QUICK PRESETS</h4>
+              <div class="grid grid-cols-2 gap-3">
+                  
+                  <button class="preset-btn bg-gray-800/50 border border-gray-700 rounded-xl p-4 text-left hover:border-primary-accent/50 transition-all duration-300" data-duration="3600000" data-interval="120000">
+                      <div class="text-white font-medium mb-1">Focus Sprint</div>
+                      <div class="text-xs text-gray-400">1h / 2min</div>
+                  </button>
+
+                  <button class="preset-btn bg-gray-800/50 border border-gray-700 rounded-xl p-4 text-left hover:border-primary-accent/50 transition-all duration-300" data-duration="7200000" data-interval="300000">
+                      <div class="text-white font-medium mb-1">Deep Work</div>
+                      <div class="text-xs text-gray-400">2h / 5min</div>
+                  </button>
+
+                  <button class="preset-btn bg-gray-800/50 border border-gray-700 rounded-xl p-4 text-left hover:border-primary-accent/50 transition-all duration-300" data-duration="14400000" data-interval="600000">
+                      <div class="text-white font-medium mb-1">Marathon</div>
+                      <div class="text-xs text-gray-400">4h / 10min</div>
+                  </button>
+
+                  <button class="preset-btn bg-gray-800/50 border border-gray-700 rounded-xl p-4 text-left hover:border-primary-accent/50 transition-all duration-300" data-duration="1500000" data-interval="60000">
+                      <div class="text-white font-medium mb-1">Quick Focus</div>
+                      <div class="text-xs text-gray-400">25min / 1min</div>
+                  </button>
+
+              </div>
+          </div>
+
+          <div id="duration-preview" class="mb-12">
+              <div class="bg-gradient-to-r from-primary-accent/10 to-secondary-accent/10 rounded-2xl p-6 border border-primary-accent/20">
+                  <div class="text-center">
+                      <div class="text-sm font-medium text-gray-400 mb-2">SESSION PREVIEW</div>
+                      <div class="flex items-center justify-center space-x-4 mb-4">
+                          <div class="text-center">
+                              <div id="preview-duration" class="text-2xl font-bold text-white">4:00:00</div>
+                              <div class="text-xs text-gray-400">Total Duration</div>
+                          </div>
+                          <div class="w-px h-12 bg-gray-600"></div>
+                          <div class="text-center">
+                              <div id="preview-interval" class="text-2xl font-bold text-primary-accent">2:00</div>
+                              <div class="text-xs text-gray-400">Reminder Every</div>
+                          </div>
+                      </div>
+                      <div class="text-xs text-gray-500">
+                          <span id="reminder-count">120</span> total reminders during this session
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+
+      <div id="action-buttons" class="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-dark-bg via-dark-bg to-transparent p-8 pt-12">
+          <div class="space-y-4">
+              
+              <button id="btn_save" class="w-full accent-gradient text-white font-bold py-4 px-6 rounded-2xl text-lg glow-button transition-all duration-300">
+                  SAVE TIMER SETTINGS
+              </button>
+
+              <button id="btn_reset_defaults" class="w-full bg-gray-800/50 border border-gray-700 text-gray-300 font-semibold py-4 px-6 rounded-2xl text-lg transition-all duration-300 hover:bg-gray-700/50">
+                  RESET TO DEFAULTS
+              </button>
+
+          </div>
+      </div>
+
+  </div>
+
+
+
+<script>
+let durationMs = 14400000;
+let intervalMs = 120000;
+let isValid = true;
+
+function updatePreview() {
+  const hours = Math.floor(durationMs / 3600000);
+  const minutes = Math.floor((durationMs % 3600000) / 60000);
+  const seconds = Math.floor((durationMs % 60000) / 1000);
+  
+  const intervalMinutes = Math.floor(intervalMs / 60000);
+  const intervalSeconds = Math.floor((intervalMs % 60000) / 1000);
+  
+  document.getElementById('preview-duration').textContent = 
+      `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  document.getElementById('preview-interval').textContent = 
+      `${intervalMinutes}:${intervalSeconds.toString().padStart(2, '0')}`;
+  
+  const reminderCount = Math.floor(durationMs / intervalMs);
+  document.getElementById('reminder-count').textContent = reminderCount;
+}
+
+function validateInputs() {
+  const errorMessage = document.getElementById('error-message');
+  const errorText = document.getElementById('error-text');
+  const saveBtn = document.getElementById('btn_save');
+  
+  let errors = [];
+  
+  if (durationMs < 60000) {
+      errors.push('Duration must be at least 1 minute');
+  }
+  
+  if (intervalMs < 10000) {
+      errors.push('Interval must be at least 10 seconds');
+  }
+  
+  if (intervalMs >= durationMs) {
+      errors.push('Interval must be less than duration');
+  }
+  
+  if (errors.length > 0) {
+      errorMessage.classList.remove('hidden');
+      errorText.textContent = errors.join('. ');
+      saveBtn.classList.add('opacity-50', 'cursor-not-allowed');
+      saveBtn.classList.remove('glow-button');
+      isValid = false;
+  } else {
+      errorMessage.classList.add('hidden');
+      saveBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      saveBtn.classList.add('glow-button');
+      isValid = true;
+  }
+}
+
+function calculateDuration() {
+  const hours = parseInt(document.getElementById('duration_hours').value) || 0;
+  const minutes = parseInt(document.getElementById('duration_minutes').value) || 0;
+  const seconds = parseInt(document.getElementById('duration_seconds').value) || 0;
+  
+  durationMs = (hours * 3600000) + (minutes * 60000) + (seconds * 1000);
+}
+
+function calculateInterval() {
+  const minutes = parseInt(document.getElementById('interval_minutes').value) || 0;
+  const seconds = parseInt(document.getElementById('interval_seconds').value) || 0;
+  
+  intervalMs = (minutes * 60000) + (seconds * 1000);
+}
+
+function updateInputs() {
+  calculateDuration();
+  calculateInterval();
+  validateInputs();
+  updatePreview();
+}
+
+document.getElementById('duration_hours').addEventListener('input', updateInputs);
+document.getElementById('duration_minutes').addEventListener('input', updateInputs);
+document.getElementById('duration_seconds').addEventListener('input', updateInputs);
+document.getElementById('interval_minutes').addEventListener('input', updateInputs);
+document.getElementById('interval_seconds').addEventListener('input', updateInputs);
+
+document.getElementById('toggle_seconds').addEventListener('click', function() {
+  const toggle = this;
+  const secondsInput = document.getElementById('seconds-input');
+  const slider = toggle.querySelector('div');
+  
+  if (secondsInput.classList.contains('hidden')) {
+      secondsInput.classList.remove('hidden');
+      toggle.classList.add('bg-primary-accent');
+      toggle.classList.remove('bg-gray-600');
+      slider.style.transform = 'translateX(24px)';
+  } else {
+      secondsInput.classList.add('hidden');
+      toggle.classList.remove('bg-primary-accent');
+      toggle.classList.add('bg-gray-600');
+      slider.style.transform = 'translateX(0)';
+      document.getElementById('duration_seconds').value = 0;
+      updateInputs();
+  }
+});
+
+document.querySelectorAll('.preset-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+      const duration = parseInt(this.dataset.duration);
+      const interval = parseInt(this.dataset.interval);
+      
+      const hours = Math.floor(duration / 3600000);
+      const minutes = Math.floor((duration % 3600000) / 60000);
+      const intervalMinutes = Math.floor(interval / 60000);
+      const intervalSeconds = Math.floor((interval % 60000) / 1000);
+      
+      document.getElementById('duration_hours').value = hours;
+      document.getElementById('duration_minutes').value = minutes;
+      document.getElementById('interval_minutes').value = intervalMinutes;
+      document.getElementById('interval_seconds').value = intervalSeconds;
+      
+      updateInputs();
+      
+      document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('border-primary-accent'));
+      this.classList.add('border-primary-accent');
+  });
+});
+
+document.getElementById('btn_save').addEventListener('click', function() {
+  if (!isValid) return;
+  
+  console.log('nudgr_timer_save', {durationMs, intervalMs});
+  
+  const notification = document.createElement('div');
+  notification.className = 'fixed top-6 left-6 right-6 bg-green-500/20 border border-green-500/30 rounded-xl p-4 z-50';
+  notification.innerHTML = `
+      <div class="flex items-center space-x-3">
+          <i class="fas fa-check-circle text-green-400"></i>
+          <span class="text-green-200 font-medium">Timer settings saved successfully!</span>
+      </div>
+  `;
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+      notification.remove();
+      window.location.href = '#dashboard';
+  }, 2000);
+});
+
+document.getElementById('btn_reset_defaults').addEventListener('click', function() {
+  document.getElementById('duration_hours').value = 4;
+  document.getElementById('duration_minutes').value = 0;
+  document.getElementById('duration_seconds').value = 0;
+  document.getElementById('interval_minutes').value = 2;
+  document.getElementById('interval_seconds').value = 0;
+  
+  updateInputs();
+  
+  document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('border-primary-accent'));
+});
+
+document.getElementById('btn_back').addEventListener('click', function() {
+  window.location.href = '#dashboard';
+});
+
+updateInputs();
+</script>
+
+</body></html>

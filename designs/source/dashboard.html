@@ -1,0 +1,538 @@
+<html><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  
+  <style>
+      ::-webkit-scrollbar { display: none; }
+      .glow-button {
+          box-shadow: 0 0 20px rgba(70, 78, 255, 0.4);
+      }
+      .gradient-bg {
+          background: linear-gradient(135deg, #1F1F2E 0%, #2A2A3E 100%);
+      }
+      .accent-gradient {
+          background: linear-gradient(135deg, #464EFF 0%, #6C4EE3 100%);
+      }
+      .pulse-ring {
+          animation: pulse-ring 2s ease-out infinite;
+      }
+      @keyframes pulse-ring {
+          0% { transform: scale(1); opacity: 1; }
+          100% { transform: scale(1.1); opacity: 0; }
+      }
+      .session-running {
+          background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+      }
+      .session-paused {
+          background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+      }
+  </style>
+  <script>tailwind.config = {
+"theme": {
+  "extend": {
+    "colors": {
+      "dark-bg": "#1F1F2E",
+      "primary-accent": "#464EFF",
+      "secondary-accent": "#6C4EE3"
+    },
+    "fontFamily": {
+      "sans": [
+        "Inter",
+        "system-ui",
+        "sans-serif"
+      ]
+    }
+  }
+}
+};</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"><style>
+    body {
+      font-family: 'Inter', sans-serif !important;
+    }
+    
+    /* Preserve Font Awesome icons */
+    .fa, .fas, .far, .fal, .fab {
+      font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+    }
+  </style><style>
+.highlighted-section {
+  outline: 2px solid #3F20FB;
+  background-color: rgba(63, 32, 251, 0.1);
+}
+
+.edit-button {
+  position: absolute;
+  z-index: 1000;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html, body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+</style></head>
+<body class="bg-dark-bg text-white overflow-x-hidden font-custom">
+
+  <div id="dashboard-screen" class="min-h-screen gradient-bg">
+      
+      <div id="header" class="flex items-center justify-between p-6 pt-12">
+          <div class="flex items-center space-x-3">
+              <div class="w-10 h-10 rounded-full accent-gradient flex items-center justify-center">
+                  <i class="fas fa-brain text-white text-lg"></i>
+              </div>
+              <div>
+                  <h1 class="text-xl font-bold text-white">NUDGR</h1>
+                  <p class="text-xs text-gray-400">Dashboard</p>
+              </div>
+          </div>
+          <button class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center">
+              <i class="fas fa-user text-gray-400"></i>
+          </button>
+      </div>
+
+      <div id="system-status-banner" class="mx-6 mb-6 bg-green-900/30 border border-green-700/50 rounded-xl p-4">
+          <div class="flex items-center space-x-3">
+              <div class="w-2 h-2 bg-green-400 rounded-full pulse-ring"></div>
+              <div class="flex-1">
+                  <p class="text-green-300 text-sm font-medium">System Ready</p>
+                  <p class="text-green-400 text-xs">Foreground service active • Battery optimized • Overlay enabled</p>
+              </div>
+              <i class="fas fa-check-circle text-green-400"></i>
+          </div>
+      </div>
+
+      <div id="session-card" class="mx-6 mb-8">
+          <div class="bg-gray-800/50 border border-gray-700 rounded-2xl p-6">
+              
+              <div id="session-header" class="flex items-center justify-between mb-6">
+                  <div>
+                      <h2 class="text-lg font-semibold text-white">Current Session</h2>
+                      <div class="flex items-center space-x-2 mt-1">
+                          <div class="w-2 h-2 bg-gray-500 rounded-full"></div>
+                          <span class="text-sm text-gray-400">OFF</span>
+                      </div>
+                  </div>
+                  <div class="text-right">
+                      <p class="text-2xl font-bold text-white">00:00</p>
+                      <p class="text-xs text-gray-400">Duration</p>
+                  </div>
+              </div>
+
+              <div id="session-summary" class="bg-gray-900/50 rounded-xl p-4 mb-6">
+                  <div class="grid grid-cols-2 gap-4">
+                      <div>
+                          <p class="text-xs text-gray-400 uppercase tracking-wide">Interval</p>
+                          <p class="text-sm font-medium text-white">5 minutes</p>
+                      </div>
+                      <div>
+                          <p class="text-xs text-gray-400 uppercase tracking-wide">Images</p>
+                          <p class="text-sm font-medium text-white">12 loaded</p>
+                      </div>
+                  </div>
+              </div>
+
+              <div id="session-controls" class="space-y-3">
+                  <button id="btn_start" class="w-full accent-gradient text-white font-bold py-4 rounded-xl glow-button transition-all duration-300">
+                      <i class="fas fa-play mr-2"></i>
+                      START SESSION
+                  </button>
+                  
+                  <div class="grid grid-cols-2 gap-3">
+                      <button id="btn_pause_resume" class="bg-gray-700 text-gray-300 font-medium py-3 rounded-xl opacity-50 cursor-not-allowed">
+                          <i class="fas fa-pause mr-2"></i>
+                          PAUSE
+                      </button>
+                      <button id="btn_end" class="bg-gray-700 text-gray-300 font-medium py-3 rounded-xl opacity-50 cursor-not-allowed">
+                          <i class="fas fa-stop mr-2"></i>
+                          END
+                      </button>
+                  </div>
+              </div>
+
+          </div>
+      </div>
+
+      <div id="image-pool-section" class="mx-6 mb-6">
+          <div class="bg-gray-800/30 border border-gray-700 rounded-xl p-5">
+              <div class="flex items-center justify-between">
+                  <div class="flex items-center space-x-3">
+                      <div class="w-10 h-10 rounded-lg bg-primary-accent/20 flex items-center justify-center">
+                          <i class="fas fa-images text-primary-accent"></i>
+                      </div>
+                      <div>
+                          <p class="font-medium text-white">Image Library</p>
+                          <p class="text-sm text-gray-400">12 motivational images</p>
+                      </div>
+                  </div>
+                  <button id="btn_manage_images" class="bg-secondary-accent text-white px-4 py-2 rounded-lg text-sm font-medium">
+                      MANAGE
+                  </button>
+              </div>
+          </div>
+      </div>
+
+      <div id="last-session-summary" class="mx-6 mb-6">
+          <div class="bg-gray-800/30 border border-gray-700 rounded-xl p-5">
+              <div class="flex items-center justify-between mb-4">
+                  <h3 class="font-semibold text-white">Last Session</h3>
+                  <button id="btn_view_report" class="text-primary-accent text-sm font-medium">
+                      VIEW REPORT
+                  </button>
+              </div>
+              
+              <div class="grid grid-cols-3 gap-4">
+                  <div class="text-center">
+                      <p class="text-xl font-bold text-green-400">45m</p>
+                      <p class="text-xs text-gray-400">Duration</p>
+                  </div>
+                  <div class="text-center">
+                      <p class="text-xl font-bold text-orange-400">8</p>
+                      <p class="text-xs text-gray-400">Unlocks</p>
+                  </div>
+                  <div class="text-center">
+                      <p class="text-xl font-bold text-blue-400">12</p>
+                      <p class="text-xs text-gray-400">Nudges</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div id="quick-links-section" class="mx-6 mb-8">
+          <h3 class="text-lg font-semibold text-white mb-4">Quick Actions</h3>
+          
+          <div class="grid grid-cols-2 gap-4">
+              <button id="btn_timers" class="bg-gray-800/50 border border-gray-700 rounded-xl p-5 text-left">
+                  <div class="w-10 h-10 rounded-lg bg-secondary-accent/20 flex items-center justify-center mb-3">
+                      <i class="fas fa-clock text-secondary-accent"></i>
+                  </div>
+                  <p class="font-medium text-white mb-1">Timer Settings</p>
+                  <p class="text-xs text-gray-400">Configure intervals</p>
+              </button>
+              
+              <button id="btn_permissions" class="bg-gray-800/50 border border-gray-700 rounded-xl p-5 text-left">
+                  <div class="w-10 h-10 rounded-lg bg-primary-accent/20 flex items-center justify-center mb-3">
+                      <i class="fas fa-shield-alt text-primary-accent"></i>
+                  </div>
+                  <p class="font-medium text-white mb-1">Permissions</p>
+                  <p class="text-xs text-gray-400">Check access</p>
+              </button>
+          </div>
+      </div>
+
+      <div id="prerequisites-check" class="mx-6 mb-8">
+          <h3 class="text-lg font-semibold text-white mb-4">Start Prerequisites</h3>
+          
+          <div class="space-y-3">
+              <div class="flex items-center justify-between bg-green-900/20 border border-green-700/30 rounded-lg p-3">
+                  <div class="flex items-center space-x-3">
+                      <i class="fas fa-check-circle text-green-400"></i>
+                      <span class="text-sm text-green-300">Images loaded (12)</span>
+                  </div>
+                  <i class="fas fa-chevron-right text-green-400 text-xs"></i>
+              </div>
+              
+              <div class="flex items-center justify-between bg-green-900/20 border border-green-700/30 rounded-lg p-3">
+                  <div class="flex items-center space-x-3">
+                      <i class="fas fa-check-circle text-green-400"></i>
+                      <span class="text-sm text-green-300">Valid timers set</span>
+                  </div>
+                  <i class="fas fa-chevron-right text-green-400 text-xs"></i>
+              </div>
+              
+              <div class="flex items-center justify-between bg-green-900/20 border border-green-700/30 rounded-lg p-3">
+                  <div class="flex items-center space-x-3">
+                      <i class="fas fa-check-circle text-green-400"></i>
+                      <span class="text-sm text-green-300">Notifications enabled</span>
+                  </div>
+                  <i class="fas fa-chevron-right text-green-400 text-xs"></i>
+              </div>
+              
+              <div class="flex items-center justify-between bg-green-900/20 border border-green-700/30 rounded-lg p-3">
+                  <div class="flex items-center space-x-3">
+                      <i class="fas fa-check-circle text-green-400"></i>
+                      <span class="text-sm text-green-300">Overlay permission granted</span>
+                  </div>
+                  <i class="fas fa-chevron-right text-green-400 text-xs"></i>
+              </div>
+              
+              <div class="flex items-center justify-between bg-orange-900/20 border border-orange-700/30 rounded-lg p-3">
+                  <div class="flex items-center space-x-3">
+                      <i class="fas fa-exclamation-triangle text-orange-400"></i>
+                      <span class="text-sm text-orange-300">Device admin (optional)</span>
+                  </div>
+                  <i class="fas fa-chevron-right text-orange-400 text-xs"></i>
+              </div>
+          </div>
+      </div>
+
+      <div id="stats-overview" class="mx-6 mb-8">
+          <h3 class="text-lg font-semibold text-white mb-4">This Week</h3>
+          
+          <div class="bg-gray-800/30 border border-gray-700 rounded-xl p-5">
+              <div class="grid grid-cols-2 gap-6">
+                  <div class="text-center">
+                      <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-primary-accent/20 flex items-center justify-center">
+                          <i class="fas fa-clock text-primary-accent text-xl"></i>
+                      </div>
+                      <p class="text-2xl font-bold text-white">8.5h</p>
+                      <p class="text-xs text-gray-400">Focus Time</p>
+                  </div>
+                  
+                  <div class="text-center">
+                      <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-secondary-accent/20 flex items-center justify-center">
+                          <i class="fas fa-mobile-alt text-secondary-accent text-xl"></i>
+                      </div>
+                      <p class="text-2xl font-bold text-white">142</p>
+                      <p class="text-xs text-gray-400">Distractions Blocked</p>
+                  </div>
+              </div>
+              
+              <div class="mt-6 pt-4 border-t border-gray-700">
+                  <div class="flex items-center justify-between">
+                      <span class="text-sm text-gray-400">Weekly Goal Progress</span>
+                      <span class="text-sm font-medium text-primary-accent">85%</span>
+                  </div>
+                  <div class="mt-2 w-full bg-gray-700 rounded-full h-2">
+                      <div class="bg-primary-accent h-2 rounded-full" style="width: 85%"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div id="recent-activity" class="mx-6 mb-8">
+          <h3 class="text-lg font-semibold text-white mb-4">Recent Activity</h3>
+          
+          <div class="space-y-3">
+              <div class="flex items-center space-x-3 bg-gray-800/30 border border-gray-700 rounded-lg p-3">
+                  <div class="w-8 h-8 rounded-full bg-green-500/20 flex items-center justify-center">
+                      <i class="fas fa-check text-green-400 text-xs"></i>
+                  </div>
+                  <div class="flex-1">
+                      <p class="text-sm font-medium text-white">Completed 45min session</p>
+                      <p class="text-xs text-gray-400">2 hours ago</p>
+                  </div>
+              </div>
+              
+              <div class="flex items-center space-x-3 bg-gray-800/30 border border-gray-700 rounded-lg p-3">
+                  <div class="w-8 h-8 rounded-full bg-blue-500/20 flex items-center justify-center">
+                      <i class="fas fa-images text-blue-400 text-xs"></i>
+                  </div>
+                  <div class="flex-1">
+                      <p class="text-sm font-medium text-white">Added 3 new images</p>
+                      <p class="text-xs text-gray-400">Yesterday</p>
+                  </div>
+              </div>
+              
+              <div class="flex items-center space-x-3 bg-gray-800/30 border border-gray-700 rounded-lg p-3">
+                  <div class="w-8 h-8 rounded-full bg-purple-500/20 flex items-center justify-center">
+                      <i class="fas fa-cog text-purple-400 text-xs"></i>
+                  </div>
+                  <div class="flex-1">
+                      <p class="text-sm font-medium text-white">Updated timer settings</p>
+                      <p class="text-xs text-gray-400">2 days ago</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div id="bottom-navigation" class="fixed bottom-0 left-0 right-0 bg-dark-bg border-t border-gray-700 px-6 py-4">
+          <div class="flex items-center justify-around">
+              <button class="flex flex-col items-center space-y-1">
+                  <i class="fas fa-home text-primary-accent text-xl"></i>
+                  <span class="text-xs text-primary-accent font-medium">Home</span>
+              </button>
+              
+              <button class="flex flex-col items-center space-y-1">
+                  <i class="fas fa-chart-bar text-gray-500 text-xl"></i>
+                  <span class="text-xs text-gray-500">Reports</span>
+              </button>
+              
+              <button class="flex flex-col items-center space-y-1">
+                  <i class="fas fa-images text-gray-500 text-xl"></i>
+                  <span class="text-xs text-gray-500">Images</span>
+              </button>
+              
+              <button class="flex flex-col items-center space-y-1">
+                  <i class="fas fa-cog text-gray-500 text-xl"></i>
+                  <span class="text-xs text-gray-500">Settings</span>
+              </button>
+          </div>
+      </div>
+
+      <div class="h-24"></div>
+
+  </div>
+
+
+
+<script>
+let sessionState = 'OFF';
+let sessionTimer = null;
+let sessionDuration = 0;
+let isPaused = false;
+
+document.getElementById('btn_start').addEventListener('click', function() {
+  if (sessionState === 'OFF') {
+      startSession();
+  }
+});
+
+document.getElementById('btn_pause_resume').addEventListener('click', function() {
+  if (sessionState === 'RUNNING') {
+      pauseSession();
+  } else if (sessionState === 'PAUSED') {
+      resumeSession();
+  }
+});
+
+document.getElementById('btn_end').addEventListener('click', function() {
+  if (sessionState !== 'OFF') {
+      endSession();
+  }
+});
+
+function startSession() {
+  console.log('nudgr_session_start');
+  sessionState = 'RUNNING';
+  sessionDuration = 0;
+  
+  updateSessionUI();
+  
+  sessionTimer = setInterval(() => {
+      if (!isPaused) {
+          sessionDuration++;
+          updateTimerDisplay();
+      }
+  }, 1000);
+  
+  document.querySelector('#system-status-banner').innerHTML = `
+      <div class="flex items-center space-x-3">
+          <div class="w-2 h-2 bg-green-400 rounded-full pulse-ring"></div>
+          <div class="flex-1">
+              <p class="text-green-300 text-sm font-medium">Session Active</p>
+              <p class="text-green-400 text-xs">Foreground service running • Monitoring unlocks</p>
+          </div>
+          <i class="fas fa-play-circle text-green-400"></i>
+      </div>
+  `;
+}
+
+function pauseSession() {
+  console.log('nudgr_session_pause');
+  sessionState = 'PAUSED';
+  isPaused = true;
+  updateSessionUI();
+  
+  document.querySelector('#system-status-banner').innerHTML = `
+      <div class="flex items-center space-x-3">
+          <div class="w-2 h-2 bg-orange-400 rounded-full"></div>
+          <div class="flex-1">
+              <p class="text-orange-300 text-sm font-medium">Session Paused</p>
+              <p class="text-orange-400 text-xs">Timer paused • Reminders disabled</p>
+          </div>
+          <i class="fas fa-pause-circle text-orange-400"></i>
+      </div>
+  `;
+  
+  document.querySelector('#system-status-banner').className = 'mx-6 mb-6 bg-orange-900/30 border border-orange-700/50 rounded-xl p-4';
+}
+
+function resumeSession() {
+  console.log('nudgr_session_resume');
+  sessionState = 'RUNNING';
+  isPaused = false;
+  updateSessionUI();
+  
+  document.querySelector('#system-status-banner').innerHTML = `
+      <div class="flex items-center space-x-3">
+          <div class="w-2 h-2 bg-green-400 rounded-full pulse-ring"></div>
+          <div class="flex-1">
+              <p class="text-green-300 text-sm font-medium">Session Resumed</p>
+              <p class="text-green-400 text-xs">Foreground service running • Monitoring unlocks</p>
+          </div>
+          <i class="fas fa-play-circle text-green-400"></i>
+      </div>
+  `;
+  
+  document.querySelector('#system-status-banner').className = 'mx-6 mb-6 bg-green-900/30 border border-green-700/50 rounded-xl p-4';
+}
+
+function endSession() {
+  console.log('nudgr_session_end');
+  sessionState = 'OFF';
+  isPaused = false;
+  
+  if (sessionTimer) {
+      clearInterval(sessionTimer);
+      sessionTimer = null;
+  }
+  
+  updateSessionUI();
+  
+  setTimeout(() => {
+      window.location.href = '#session_summary';
+  }, 500);
+}
+
+function updateSessionUI() {
+  const statusElement = document.querySelector('#session-header .flex .div:last-child span');
+  const statusDot = document.querySelector('#session-header .w-2');
+  const startBtn = document.getElementById('btn_start');
+  const pauseBtn = document.getElementById('btn_pause_resume');
+  const endBtn = document.getElementById('btn_end');
+  
+  if (sessionState === 'OFF') {
+      statusDot.className = 'w-2 h-2 bg-gray-500 rounded-full';
+      document.querySelector('#session-header .flex .div:last-child span').textContent = 'OFF';
+      startBtn.className = 'w-full accent-gradient text-white font-bold py-4 rounded-xl glow-button transition-all duration-300';
+      startBtn.innerHTML = '<i class="fas fa-play mr-2"></i>START SESSION';
+      pauseBtn.className = 'bg-gray-700 text-gray-300 font-medium py-3 rounded-xl opacity-50 cursor-not-allowed';
+      endBtn.className = 'bg-gray-700 text-gray-300 font-medium py-3 rounded-xl opacity-50 cursor-not-allowed';
+  } else if (sessionState === 'RUNNING') {
+      statusDot.className = 'w-2 h-2 bg-green-400 rounded-full pulse-ring';
+      document.querySelector('#session-header .flex .div:last-child span').textContent = 'RUNNING';
+      startBtn.className = 'w-full bg-gray-700 text-gray-300 font-medium py-4 rounded-xl opacity-50 cursor-not-allowed';
+      startBtn.innerHTML = '<i class="fas fa-check mr-2"></i>SESSION ACTIVE';
+      pauseBtn.className = 'session-paused text-white font-medium py-3 rounded-xl';
+      pauseBtn.innerHTML = '<i class="fas fa-pause mr-2"></i>PAUSE';
+      endBtn.className = 'bg-red-600 text-white font-medium py-3 rounded-xl';
+      endBtn.innerHTML = '<i class="fas fa-stop mr-2"></i>END';
+  } else if (sessionState === 'PAUSED') {
+      statusDot.className = 'w-2 h-2 bg-orange-400 rounded-full';
+      document.querySelector('#session-header .flex .div:last-child span').textContent = 'PAUSED';
+      pauseBtn.className = 'session-running text-white font-medium py-3 rounded-xl';
+      pauseBtn.innerHTML = '<i class="fas fa-play mr-2"></i>RESUME';
+  }
+}
+
+function updateTimerDisplay() {
+  const minutes = Math.floor(sessionDuration / 60);
+  const seconds = sessionDuration % 60;
+  const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  document.querySelector('#session-header .text-right .text-2xl').textContent = timeString;
+}
+
+document.getElementById('btn_manage_images').addEventListener('click', function() {
+  window.location.href = '#manage_images';
+});
+
+document.getElementById('btn_view_report').addEventListener('click', function() {
+  window.location.href = '#session_reports';
+});
+
+document.getElementById('btn_timers').addEventListener('click', function() {
+  window.location.href = '#timer_settings';
+});
+
+document.getElementById('btn_permissions').addEventListener('click', function() {
+  window.location.href = '#permissions';
+});
+</script>
+
+</body></html>

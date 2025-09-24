@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Nudgr</string>
+    
+    <!-- Welcome Screen -->
+    <string name="welcome_title">Nudgr</string>
+    <string name="welcome_subtitle">Reclaim your focus</string>
+    <string name="welcome_description">Gentle reminders to put your phone down and stay focused on what matters most.</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="continue_with_email">Continue with Email</string>
+    <string name="continue_as_guest">Continue as Guest</string>
+    <string name="skip">SKIP</string>
+    
+    <!-- Checklist Screen -->
+    <string name="checklist_title">Setup Checklist</string>
+    <string name="add_images">Add Images</string>
+    <string name="set_timers">Set Timers</string>
+    <string name="grant_permissions">Grant Permissions</string>
+    <string name="continue_setup">Continue Setup</string>
+    
+    <!-- Permissions -->
+    <string name="permissions_title">Permissions</string>
+    <string name="notifications_permission">Notifications</string>
+    <string name="battery_optimization">Battery Optimization</string>
+    <string name="overlay_permission">Overlay Permission</string>
+    <string name="storage_permission">Storage Access</string>
+    <string name="device_admin">Device Admin</string>
+    
+    <!-- Images -->
+    <string name="image_library_title">Image Library</string>
+    <string name="add_images_action">Add Images</string>
+    <string name="no_images_message">No images added yet</string>
+    <string name="add_your_first_images">Add your first motivational images to get started</string>
+    
+    <!-- Timers -->
+    <string name="timer_setup_title">Timer Setup</string>
+    <string name="deep_work_duration">Deep Work Duration</string>
+    <string name="reminder_interval">Reminder Interval</string>
+    <string name="save_timers">Save Timers</string>
+    <string name="reset_defaults">Reset to Defaults</string>
+    
+    <!-- Dashboard -->
+    <string name="dashboard_title">Dashboard</string>
+    <string name="start_session">Start Session</string>
+    <string name="end_session">End Session</string>
+    <string name="pause_session">Pause</string>
+    <string name="resume_session">Resume</string>
+    
+    <!-- Reminder -->
+    <string name="time_to_refocus">Time to refocus</string>
+    <string name="lock_phone">Lock Phone</string>
+    <string name="snooze">Snooze</string>
+    <string name="extend">Extend</string>
+    
+    <!-- Reports -->
+    <string name="reports_title">Reports</string>
+    <string name="session_summary_title">Session Summary</string>
+    <string name="view_full_report">View Full Report</string>
+    <string name="start_new_session">Start New Session</string>
+    
+    <!-- Common -->
+    <string name="back">Back</string>
+    <string name="done">Done</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="replace">Replace</string>
+    <string name="btn_continue">Continue</string>
+    
+    <!-- Status -->
+    <string name="session_running">Running</string>
+    <string name="session_paused">Paused</string>
+    <string name="session_completed">Completed</string>
+    <string name="session_cancelled">Cancelled</string>
+    
+    <!-- Time formats -->
+    <string name="time_format_hours_minutes">%02d:%02d</string>
+    <string name="time_format_hours_minutes_seconds">%02d:%02d:%02d</string>
+    <string name="remaining_time">Remaining: %s</string>
+    <string name="next_reminder_in">Next reminder in: %s</string>
+</resources>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Global button text look (uses Inter) -->
+    <style name="TextAppearance.Nudgr.Button" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:fontFamily">@font/inter_semibold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Base Material3 button -->
+    <style name="NudgrButton.Base" parent="Widget.Material3.Button">
+        <!-- Text -->
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/inter_semibold</item>
+        <item name="textAppearance">@style/TextAppearance.Nudgr.Button</item>
+
+        <!-- Shape (Material3 way): rounded-2xl (~16dp) -->
+        <!-- You can also define a shared ShapeAppearance style if you prefer -->
+        <item name="shapeAppearance">?attr/shapeAppearanceSmallComponent</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.Nudgr.Rounded16</item>
+
+        <!-- Ripple (optional; theme may already handle it) -->
+        <item name="rippleColor">@color/ripple_neutral</item>
+
+        <!-- Elevation (optional) -->
+        <item name="elevation">2dp</item>
+    </style>
+
+    <!-- Rounded 16dp overlay -->
+    <style name="ShapeAppearance.Nudgr.Rounded16" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <!-- Primary: gradient background + white text -->
+    <style name="NudgrButton.Primary" parent="NudgrButton.Base">
+        <!-- Use a ripple selector that draws on top of your gradient -->
+        <item name="android:background">@drawable/btn_primary_ripple</item>
+        <item name="android:textColor">@color/btn_primary_text</item>
+        <!-- Disable default tint so gradient shows correctly -->
+        <item name="backgroundTint">@null</item>
+    </style>
+
+    <!-- Secondary: Light (white fill, dark text) -->
+    <style name="NudgrButton.Secondary.Light" parent="NudgrButton.Base">
+        <item name="backgroundTint">@color/btn_secondary_light_bg</item>
+        <item name="android:textColor">@color/btn_secondary_light_text</item>
+        <item name="strokeColor">@color/btn_secondary_light_stroke</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <!-- Secondary: Dark (transparent bg, gray stroke, white text) -->
+    <style name="NudgrButton.Secondary.Dark" parent="NudgrButton.Base">
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="android:textColor">@color/btn_secondary_dark_text</item>
+        <item name="strokeColor">@color/btn_secondary_dark_stroke</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+</resources>
