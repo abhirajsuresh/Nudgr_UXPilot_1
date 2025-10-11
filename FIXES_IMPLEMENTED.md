@@ -7,7 +7,7 @@
 
 ## Summary
 
-Successfully implemented all 3 critical fixes from `CRITICAL_FIXES_NEEDED.md` using Taskmaster:
+Successfully implemented all 3 critical fixes from `CRITICAL_FIXES_NEEDED.md` (now archived at [docs/archive/CRITICAL_FIXES_NEEDED.md](docs/archive/CRITICAL_FIXES_NEEDED.md)) using Taskmaster:
 
 ### ✅ Task #1: Session Event Tracking (HIGH PRIORITY) - DONE
 **File:** `app/src/main/java/com/nudgr/service/SessionEngineService.kt`
