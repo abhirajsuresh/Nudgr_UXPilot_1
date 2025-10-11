@@ -28,3 +28,19 @@ node_modules/
 # Task files
 # tasks.json
 # tasks/ 
+
+# Gradle build artifacts
+app/build/**
+.gradle/**
+build/
+local.properties
+
+# Android Studio
+*.iml
+.idea/
+captures/
+.externalNativeBuild
+.cxx
+
+# NDK
+obj/
