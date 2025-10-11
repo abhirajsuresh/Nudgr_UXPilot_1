@@ -1,5 +1,5 @@
 {
-  "master": {
+  "main": {
     "tasks": [
       {
         "id": 11,
@@ -158,7 +158,7 @@
     "metadata": {
       "created": "2025-10-07T18:16:17.300Z",
       "updated": "2025-10-07T19:17:43.991Z",
-      "description": "Tasks for master context"
+      "description": "Tasks for main context"
     }
   }
 }
