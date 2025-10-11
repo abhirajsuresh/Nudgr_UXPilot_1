@@ -2,6 +2,7 @@ package com.nudgr.ui.checklist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nudgr.analytics.AnalyticsHelper
 import com.nudgr.data.repository.ImageRepository
 import com.nudgr.data.repository.SessionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,6 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ChecklistViewModel @Inject constructor(
+    private val analyticsHelper: AnalyticsHelper,
     private val imageRepository: ImageRepository,
     private val sessionRepository: SessionRepository
     // TODO: Add preferences repository for timer and permission states
@@ -41,6 +43,12 @@ class ChecklistViewModel @Inject constructor(
                 canContinue = hasAtLeastOneImage && hasValidTimers && hasCorePermissions
             )
         }
+    }
+
+    // This would be called when the user clicks the final "Continue" or "Finish" button
+    fun onChecklistCompleted() {
+        analyticsHelper.trackEvent(AnalyticsHelper.Event.ONBOARDING_CHECKLIST_COMPLETE)
+        // Navigation logic would be handled in the UI layer
     }
 }
 

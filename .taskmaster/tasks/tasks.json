@@ -1,0 +1,55 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Fix Session Event Tracking",
+        "description": "Update SessionEngineService to persist nudge and unlock counts to the Session entity",
+        "details": "Modify triggerNudge() to increment totalReminders in Session entity. Modify onScreenUnlocked() to increment totalUnlocks in Session entity. This ensures session summaries show accurate counts.",
+        "testStrategy": "Test nudge triggering updates database. Test screen unlock tracking updates database. Verify SessionSummaryScreen displays correct counts.",
+        "status": "done",
+        "dependencies": [],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 2,
+        "title": "Implement Snooze and Extend Logic",
+        "description": "Complete ReminderViewModel snooze() and extend() methods to properly handle nudge delays and session extensions",
+        "details": "Implement snooze() to communicate with SessionEngineService to delay next nudge. Implement extend() to add 5 minutes to current session duration. Add necessary SessionController methods.",
+        "testStrategy": "Test snooze delays next nudge by configured interval. Test extend adds 5 minutes to session. Verify both track events in SessionEvent table.",
+        "status": "done",
+        "dependencies": [],
+        "priority": "high",
+        "subtasks": []
+      },
+      {
+        "id": 3,
+        "title": "Implement Boot Recovery Logic",
+        "description": "Complete onBootCompleted() in SessionEngineService to recover active sessions after device reboot",
+        "details": "Check for sessions with RUNNING or PAUSED status on boot. Calculate remaining time and restart session if time remains. Mark as COMPLETED if time has expired.",
+        "testStrategy": "Start session, reboot device, verify session continues. Start session near end, reboot, verify session completes properly.",
+        "status": "done",
+        "dependencies": [],
+        "priority": "medium",
+        "subtasks": []
+      },
+      {
+        "id": 4,
+        "title": "Implement Daily/Weekly Session Statistics",
+        "description": "Add session aggregation functionality to show daily, weekly, and monthly statistics with a beautiful stats screen",
+        "details": "1. Add aggregation methods to SessionRepository (getDailyStats, getWeeklyStats, getMonthlyStats)\n2. Create SessionStats data class with calculated properties\n3. Create StatsScreen.kt with card-based UI showing today, week, and month stats\n4. Create StatsViewModel.kt to manage statistics state\n5. Add stats route to navigation in MainActivity\n6. Optional: Add quick stats widget to Dashboard",
+        "testStrategy": "Verify stats calculate correctly. Test with multiple completed sessions. Verify UI displays stats properly. Test date range calculations for daily/weekly/monthly.",
+        "status": "done",
+        "dependencies": [],
+        "priority": "medium",
+        "subtasks": []
+      }
+    ],
+    "metadata": {
+      "created": "2025-10-11T12:02:56.070Z",
+      "description": "Default tasks context",
+      "updated": "2025-10-11T13:14:24.689Z"
+    }
+  }
+}

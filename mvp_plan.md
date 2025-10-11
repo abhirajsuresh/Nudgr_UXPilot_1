@@ -1,13 +1,14 @@
-# 🚀 Nudgr – Android MVP Task Plan (Cursor-Ready)
-
+# 🚀 Nudgr – Android MVP Task Plan (Cursor-Ready)- Local `SessionLog` store using Room database.  
+- Compute daily/weekly totals (minutes + nudges).  
 **Project facts**
 - Package: `com.nudgr`
 - Min SDK: 26, Target: 34
 - Layouts: `app/src/main/res/layout`
 - Drawables/Fonts/Values: `app/src/main/res/{drawable,font,values}`
 - Designs + HTML:  
-  - `C:\Users\abhi9\Desktop\Projects\Nudgr with zux Pilot\designs\screens`  
-  - `C:\Users\abhi9\Desktop\Projects\Nudgr with zux Pilot\designs\source`  
+  - `./designs/screens`  
+  - `./designs/source`  
+  - _**Note:** These paths are relative to the project root. For environment-specific configurations, you can use `${PROJECT_ROOT}/designs/screens` or set `DESIGN_DIR` environment variable for portability across different environments and CI/CD pipelines._
 - Firebase configured (`google-services.json` in `app/`)
 - SHA-1 / SHA-256 added in Firebase console  
 - Firestore + Storage + Crashlytics + Auth + Analytics enabled
@@ -87,9 +88,11 @@
   - `compileSdk 34`, `minSdk 26`, `targetSdk 34`
   - `buildFeatures { viewBinding true }`
   - Add deps: Material, ConstraintLayout, Navigation, Lifecycle, Coroutines, DataStore, Coil, Hilt (+ kapt), Firebase BOM + Auth/Firestore/Storage/Analytics/Crashlytics  
-- Manifest:
-  - Permissions: `SYSTEM_ALERT_WINDOW`, `FOREGROUND_SERVICE`, `WAKE_LOCK`, `POST_NOTIFICATIONS`, `SCHEDULE_EXACT_ALARM` (optional)  
-  - Services: `SessionService`, `OverlayService`, `NudgeAlarmReceiver`, `BootRestoreReceiver`  
+ - Manifest:
+   - Permissions: `SYSTEM_ALERT_WINDOW`, `FOREGROUND_SERVICE`, `WAKE_LOCK`, `POST_NOTIFICATIONS`, `SCHEDULE_EXACT_ALARM` (optional)
+   - Notification channels: Create "session_service_channel" and "nudge_channel" in Application.onCreate()
+   - Consider: `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS` for service reliability
+   - Services: `SessionService`, `OverlayService`, `NudgeAlarmReceiver`, `BootRestoreReceiver`  - Services: `SessionService`, `OverlayService`, `NudgeAlarmReceiver`, `BootRestoreReceiver`  
 
 **Output**
 - Diff of Gradle + Manifest.  

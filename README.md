@@ -52,6 +52,28 @@ app/src/main/java/com/nudgr/
 3. Sync Gradle files
 4. Run on device or emulator
 
+### Environment Variables
+
+This project uses environment variables to handle sensitive API keys. To get started, you'll need to create a `.cursor/mcp.json` file.
+
+1.  Copy the example configuration file:
+    ```bash
+    cp .cursor/mcp.json.example .cursor/mcp.json
+    ```
+2.  The `.cursor/mcp.json` file is configured to read the following environment variables. Ensure these are set in your development environment (e.g., in your shell profile or using a `.env` file loaded by your shell):
+
+    *   `ANTHROPIC_API_KEY`
+    *   `PERPLEXITY_API_KEY`
+    *   `OPENAI_API_KEY`
+    *   `GOOGLE_API_KEY`
+    *   `XAI_API_KEY`
+    *   `OPENROUTER_API_KEY`
+    *   `MISTRAL_API_KEY`
+    *   `AZURE_OPENAI_API_KEY`
+    *   `OLLAMA_API_KEY`
+
+The application will load these variables at runtime. The `.cursor/mcp.json` file itself is excluded from version control via `.gitignore`.
+
 ## Permissions
 
 The app requires several permissions:

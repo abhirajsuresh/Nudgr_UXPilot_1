@@ -17,6 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ReminderViewModel @Inject constructor(
     private val imageRepository: ImageRepository,
+    private val sessionController: com.nudgr.service.SessionController,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
     
@@ -65,17 +66,27 @@ class ReminderViewModel @Inject constructor(
     
     fun snooze() {
         viewModelScope.launch {
-            // TODO: Implement snooze logic - restart countdown
-            // TODO: Track nudgr_action_snooze event
-            // analytics.track("nudgr_action_snooze")
+            try {
+                // Snooze for 5 minutes (default)
+                sessionController.snoozeNudge(5 * 60 * 1000L)
+                // TODO: Track nudgr_action_snooze event
+                // analytics.track("nudgr_action_snooze")
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
     
     fun extend() {
         viewModelScope.launch {
-            // TODO: Implement extend logic - add time to next interval
-            // TODO: Track nudgr_action_extend event
-            // analytics.track("nudgr_action_extend")
+            try {
+                // Extend session by 5 minutes (default)
+                sessionController.extendSession(5 * 60 * 1000L)
+                // TODO: Track nudgr_action_extend event
+                // analytics.track("nudgr_action_extend")
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 }

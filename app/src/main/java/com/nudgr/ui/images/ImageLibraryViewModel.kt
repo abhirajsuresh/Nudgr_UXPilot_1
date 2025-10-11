@@ -4,7 +4,8 @@ import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.nudgr.data.local.entity.Image
+import android.os.Bundle
+import com.nudgr.analytics.AnalyticsHelperimport com.nudgr.data.local.entity.Image
 import com.nudgr.data.repository.ImageRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -21,6 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ImageLibraryViewModel @Inject constructor(
+    private val analyticsHelper: AnalyticsHelper,
     private val imageRepository: ImageRepository,
     @ApplicationContext private val context: Context
 ) : ViewModel() {
@@ -60,8 +62,9 @@ class ImageLibraryViewModel @Inject constructor(
                     }
                 }
                 
-                // TODO: Track nudgr_images_add event
-                // analytics.track("nudgr_images_add", mapOf("count" to importedImages.size))
+                analyticsHelper.trackEvent(AnalyticsHelper.Event.IMAGES_ADDED, Bundle().apply {
+                    putInt(AnalyticsHelper.Param.IMAGE_COUNT, importedImages.size)
+                })
                 
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -157,18 +160,60 @@ class ImageLibraryViewModel @Inject constructor(
                 
                 // Delete from database
                 imageRepository.deleteImage(image)
-                
-                // TODO: Track nudgr_images_delete event
-                // analytics.track("nudgr_images_delete", mapOf("count" to 1))
+
+                analyticsHelper.trackEvent(AnalyticsHelper.Event.IMAGES_DELETED, Bundle().apply {
+                    putInt(AnalyticsHelper.Param.IMAGE_COUNT, 1)
+                })
                 
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
+
+    fun deleteSelectedImages() {
+        viewModelScope.launch {
+            val selectedImages = _uiState.value.images.filter { it.id in _uiState.value.selectedImageIds }
+            val deletedCount = selectedImages.size
+            selectedImages.forEach { image ->
+                try {
+                    val file = File(image.filePath)
+                    if (file.exists()) {
+                        file.delete()
+                    }
+                    imageRepository.deleteImage(image)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+            analyticsHelper.trackEvent(AnalyticsHelper.Event.IMAGES_DELETED, Bundle().apply {
+                putInt(AnalyticsHelper.Param.IMAGE_COUNT, deletedCount)
+            })
+            clearSelection()
+        }
+    }
+    fun toggleImageSelection(imageId: String) {
+        val currentSelection = _uiState.value.selectedImageIds
+        val newSelection = if (imageId in currentSelection) {
+            currentSelection - imageId
+        } else {
+            currentSelection + imageId
+        }
+        _uiState.value = _uiState.value.copy(selectedImageIds = newSelection)
+    }
+
+    fun selectAllImages() {
+        val allImageIds = _uiState.value.images.map { it.id }.toSet()
+        _uiState.value = _uiState.value.copy(selectedImageIds = allImageIds)
+    }
+
+    fun clearSelection() {
+        _uiState.value = _uiState.value.copy(selectedImageIds = emptySet())
+    }
 }
 
 data class ImageLibraryUiState(
     val images: List<Image> = emptyList(),
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val selectedImageIds: Set<String> = emptySet()
 )

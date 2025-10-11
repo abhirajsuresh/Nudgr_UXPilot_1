@@ -2,37 +2,43 @@ package com.nudgr.ui.timers
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nudgr.data.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class TimerSetupViewModel @Inject constructor(
-    // TODO: Add preferences repository for persisting timer settings
+    private val settingsRepository: SettingsRepository
 ) : ViewModel() {
     
     private val _uiState = MutableStateFlow(TimerSetupUiState())
     val uiState: StateFlow<TimerSetupUiState> = _uiState.asStateFlow()
     
-    fun loadCurrentSettings() {
+    init {
         viewModelScope.launch {
-            // TODO: Load from preferences
-            // For now, use default values
-            _uiState.value = _uiState.value.copy(
-                durationHours = 4,
-                durationMinutes = 0,
-                intervalMinutes = 2,
-                intervalSeconds = 0
-            )
-            validateSettings()
+            combine(
+                settingsRepository.durationMs,
+                settingsRepository.intervalMs
+            ) { duration, interval ->
+                Pair(duration, interval)
+            }.collect { (duration, interval) ->
+                _uiState.value = _uiState.value.copy(
+                    durationHours = (duration / (1000 * 60 * 60)).toInt(),
+                    durationMinutes = ((duration / (1000 * 60)) % 60).toInt(),
+                    intervalMinutes = (interval / (1000 * 60)).toInt(),
+                    intervalSeconds = ((interval / 1000) % 60).toInt()
+                )
+            }
         }
     }
     
-    fun updateDurationHours(hours: Int) {
-        _uiState.value = _uiState.value.copy(durationHours = hours.coerceIn(0, 24))
+    fun onDurationHoursChanged(hours: String) {
+        _uiState.value = _uiState.value.copy(durationHours = hours.toIntOrNull() ?: 0)
         validateSettings()
     }
     
@@ -84,21 +90,15 @@ class TimerSetupViewModel @Inject constructor(
     }
     
     fun saveTimers() {
+        if (!_uiState.value.isValid) return
+
         viewModelScope.launch {
-            val state = _uiState.value
-            if (state.isValid) {
-                // TODO: Save to preferences
-                // preferencesRepository.saveTimerSettings(state.durationMs, state.intervalMs)
-                
-                // TODO: Track nudgr_timer_save event
-                // analytics.track("nudgr_timer_save", mapOf(
-                //     "durationMs" to state.durationMs,
-                //     "intervalMs" to state.intervalMs
-                // ))
-            }
+            settingsRepository.saveTimers(
+                _uiState.value.durationMs,
+                _uiState.value.intervalMs
+            )
         }
-    }
-}
+    }}
 
 data class TimerSetupUiState(
     val durationHours: Int = 0,

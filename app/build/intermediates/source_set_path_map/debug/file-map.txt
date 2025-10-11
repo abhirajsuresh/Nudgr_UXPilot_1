@@ -1,65 +1,74 @@
-com.nudgr.app-lifecycle-viewmodel-savedstate-2.6.2-0 C:\Users\abhi9\.gradle\caches\transforms-3\056d4f6e1a8610900ab343d3f5ca786a\transformed\lifecycle-viewmodel-savedstate-2.6.2\res
-com.nudgr.app-ui-tooling-1.4.3-1 C:\Users\abhi9\.gradle\caches\transforms-3\0abc37a67525f6854196132057fb2ec3\transformed\ui-tooling-1.4.3\res
-com.nudgr.app-room-ktx-2.5.0-2 C:\Users\abhi9\.gradle\caches\transforms-3\0b6c8e59f32ecdef0d1b97e089d6833c\transformed\room-ktx-2.5.0\res
-com.nudgr.app-material3-1.1.1-3 C:\Users\abhi9\.gradle\caches\transforms-3\0be6665c125f6001b7dceec93207dea3\transformed\material3-1.1.1\res
-com.nudgr.app-navigation-runtime-ktx-2.6.0-4 C:\Users\abhi9\.gradle\caches\transforms-3\1093105b8f6403dc854f60b43f777cf2\transformed\navigation-runtime-ktx-2.6.0\res
-com.nudgr.app-savedstate-ktx-1.2.1-5 C:\Users\abhi9\.gradle\caches\transforms-3\187de51283b8b5041016b23526c80f0e\transformed\savedstate-ktx-1.2.1\res
-com.nudgr.app-lifecycle-viewmodel-compose-2.6.2-6 C:\Users\abhi9\.gradle\caches\transforms-3\20fa8434c89a6edf660bcf75897ade79\transformed\lifecycle-viewmodel-compose-2.6.2\res
-com.nudgr.app-foundation-layout-1.4.3-7 C:\Users\abhi9\.gradle\caches\transforms-3\2ae5a3cd83a31586c1d2f7df0bee4d73\transformed\foundation-layout-1.4.3\res
-com.nudgr.app-material-icons-core-1.4.3-8 C:\Users\abhi9\.gradle\caches\transforms-3\2bbb380e2bd8a5c45a4fad89a228895e\transformed\material-icons-core-1.4.3\res
-com.nudgr.app-hilt-navigation-1.0.0-9 C:\Users\abhi9\.gradle\caches\transforms-3\3379e70dd8faba22ee2141064bd5ed76\transformed\hilt-navigation-1.0.0\res
-com.nudgr.app-hilt-navigation-compose-1.0.0-10 C:\Users\abhi9\.gradle\caches\transforms-3\360f4b3fb035b254696b34d48e1af7af\transformed\hilt-navigation-compose-1.0.0\res
-com.nudgr.app-navigation-compose-2.6.0-11 C:\Users\abhi9\.gradle\caches\transforms-3\3d6303c4e44c3b72d12ca438111aaa01\transformed\navigation-compose-2.6.0\res
-com.nudgr.app-activity-ktx-1.7.2-12 C:\Users\abhi9\.gradle\caches\transforms-3\4380474193438290cffca7afe7815751\transformed\activity-ktx-1.7.2\res
-com.nudgr.app-appcompat-resources-1.6.1-13 C:\Users\abhi9\.gradle\caches\transforms-3\46449806d19c16c2239ee6aa0d051d32\transformed\appcompat-resources-1.6.1\res
-com.nudgr.app-ui-geometry-1.4.3-14 C:\Users\abhi9\.gradle\caches\transforms-3\46b22a159968f666a3514b2e7a8bc666\transformed\ui-geometry-1.4.3\res
-com.nudgr.app-fragment-1.5.1-15 C:\Users\abhi9\.gradle\caches\transforms-3\50a455a9bb4b86b90e3994f8f60e04b4\transformed\fragment-1.5.1\res
-com.nudgr.app-ui-1.4.3-16 C:\Users\abhi9\.gradle\caches\transforms-3\5141341331307bf72c533547f5419ec5\transformed\ui-1.4.3\res
-com.nudgr.app-ui-test-manifest-1.4.3-17 C:\Users\abhi9\.gradle\caches\transforms-3\57c8158b76ed4d44a4fbb38ee8f14a1b\transformed\ui-test-manifest-1.4.3\res
-com.nudgr.app-core-ktx-1.10.1-18 C:\Users\abhi9\.gradle\caches\transforms-3\5b354cfd7849a8b832ad162b0cb3c77c\transformed\core-ktx-1.10.1\res
-com.nudgr.app-startup-runtime-1.1.1-19 C:\Users\abhi9\.gradle\caches\transforms-3\67246878546c09d1f83777ef07313efe\transformed\startup-runtime-1.1.1\res
-com.nudgr.app-lifecycle-runtime-ktx-2.6.2-20 C:\Users\abhi9\.gradle\caches\transforms-3\6a80c498cc8fd47b19ae8ab562c71d20\transformed\lifecycle-runtime-ktx-2.6.2\res
-com.nudgr.app-ui-util-1.4.3-21 C:\Users\abhi9\.gradle\caches\transforms-3\7424f51838f123aece49782a0c6190e4\transformed\ui-util-1.4.3\res
-com.nudgr.app-material-1.4.3-22 C:\Users\abhi9\.gradle\caches\transforms-3\77713690bae52fe5a99b3e684c1009ef\transformed\material-1.4.3\res
-com.nudgr.app-coil-base-2.4.0-23 C:\Users\abhi9\.gradle\caches\transforms-3\784a4e2508c12bd2f5bc5e2ff658b002\transformed\coil-base-2.4.0\res
-com.nudgr.app-ui-graphics-1.4.3-24 C:\Users\abhi9\.gradle\caches\transforms-3\796790e781bb2fb4d259447388aa0a0a\transformed\ui-graphics-1.4.3\res
-com.nudgr.app-savedstate-1.2.1-25 C:\Users\abhi9\.gradle\caches\transforms-3\79bfbfa1b31b3d3bd11a14de23ee748f\transformed\savedstate-1.2.1\res
-com.nudgr.app-lifecycle-livedata-2.6.2-26 C:\Users\abhi9\.gradle\caches\transforms-3\7c0be415e8f986197961b3ea151f13fa\transformed\lifecycle-livedata-2.6.2\res
-com.nudgr.app-navigation-common-2.6.0-27 C:\Users\abhi9\.gradle\caches\transforms-3\837f447437d4e4bfc190512c3859f817\transformed\navigation-common-2.6.0\res
-com.nudgr.app-ui-unit-1.4.3-28 C:\Users\abhi9\.gradle\caches\transforms-3\85c65d2feac80566aefda9b084282b82\transformed\ui-unit-1.4.3\res
-com.nudgr.app-material-ripple-1.4.3-29 C:\Users\abhi9\.gradle\caches\transforms-3\87743590abb5e7f662dacd9edb5fba3e\transformed\material-ripple-1.4.3\res
-com.nudgr.app-customview-poolingcontainer-1.0.0-30 C:\Users\abhi9\.gradle\caches\transforms-3\97117b1f2aa370baeda29f109c7f5317\transformed\customview-poolingcontainer-1.0.0\res
-com.nudgr.app-ui-text-1.4.3-31 C:\Users\abhi9\.gradle\caches\transforms-3\a27e219863959b224deff94b20aa75b4\transformed\ui-text-1.4.3\res
-com.nudgr.app-animation-core-1.4.3-32 C:\Users\abhi9\.gradle\caches\transforms-3\ab2b1a8c5046da9e0238e7b8a2e41837\transformed\animation-core-1.4.3\res
-com.nudgr.app-datastore-preferences-1.0.0-33 C:\Users\abhi9\.gradle\caches\transforms-3\b58e3111b5b99dd82600e64073b367b7\transformed\datastore-preferences-1.0.0\res
-com.nudgr.app-navigation-common-ktx-2.6.0-34 C:\Users\abhi9\.gradle\caches\transforms-3\b757100f98243fcb8760afa73d046cf6\transformed\navigation-common-ktx-2.6.0\res
-com.nudgr.app-lifecycle-viewmodel-2.6.2-35 C:\Users\abhi9\.gradle\caches\transforms-3\bca93d5b0c596a4a678295672f5165cc\transformed\lifecycle-viewmodel-2.6.2\res
-com.nudgr.app-emoji2-1.3.0-36 C:\Users\abhi9\.gradle\caches\transforms-3\c1ff696a9ed4498ca0ea98b619a6b1e8\transformed\emoji2-1.3.0\res
-com.nudgr.app-lifecycle-livedata-core-2.6.2-37 C:\Users\abhi9\.gradle\caches\transforms-3\c407f8775a83ffbcd41b1d0861089440\transformed\lifecycle-livedata-core-2.6.2\res
-com.nudgr.app-lifecycle-runtime-2.6.2-38 C:\Users\abhi9\.gradle\caches\transforms-3\cd787bba6ed2cb1be0bb9711dd99d4ba\transformed\lifecycle-runtime-2.6.2\res
-com.nudgr.app-lifecycle-viewmodel-ktx-2.6.2-39 C:\Users\abhi9\.gradle\caches\transforms-3\cf240e914f7b8d6d9e56b75a72a79645\transformed\lifecycle-viewmodel-ktx-2.6.2\res
-com.nudgr.app-room-runtime-2.5.0-40 C:\Users\abhi9\.gradle\caches\transforms-3\d0c24c40d38611d7e4fdcff84a191446\transformed\room-runtime-2.5.0\res
-com.nudgr.app-lifecycle-process-2.6.2-41 C:\Users\abhi9\.gradle\caches\transforms-3\d5bf704a2900f805d1a47870d5437b61\transformed\lifecycle-process-2.6.2\res
-com.nudgr.app-ui-tooling-data-1.4.3-42 C:\Users\abhi9\.gradle\caches\transforms-3\dab761b1e0d08e5e30bcbf4eb9e5d18f\transformed\ui-tooling-data-1.4.3\res
-com.nudgr.app-navigation-runtime-2.6.0-43 C:\Users\abhi9\.gradle\caches\transforms-3\db102a994f814e3447a830d30648f4c4\transformed\navigation-runtime-2.6.0\res
-com.nudgr.app-annotation-experimental-1.3.0-44 C:\Users\abhi9\.gradle\caches\transforms-3\dba14b6a345f83e271e1c660ab5fed91\transformed\annotation-experimental-1.3.0\res
-com.nudgr.app-profileinstaller-1.3.1-45 C:\Users\abhi9\.gradle\caches\transforms-3\dbbb21a6520a4ed12ec464493adf93ac\transformed\profileinstaller-1.3.1\res
-com.nudgr.app-activity-1.7.2-46 C:\Users\abhi9\.gradle\caches\transforms-3\dcfafd4294eb28c8343c85de6bb4041c\transformed\activity-1.7.2\res
-com.nudgr.app-animation-1.4.3-47 C:\Users\abhi9\.gradle\caches\transforms-3\e30a928ead5e9f0a0e7098608a78562a\transformed\animation-1.4.3\res
-com.nudgr.app-runtime-1.4.3-48 C:\Users\abhi9\.gradle\caches\transforms-3\e459041ade3ef65b7ddebae9a7b365f2\transformed\runtime-1.4.3\res
-com.nudgr.app-sqlite-2.3.0-49 C:\Users\abhi9\.gradle\caches\transforms-3\e77b19d3a4528ad3c65b4ab6b4268128\transformed\sqlite-2.3.0\res
-com.nudgr.app-material-icons-extended-1.4.3-50 C:\Users\abhi9\.gradle\caches\transforms-3\ebaddd9df99b10e1bd84a2d25a4c7875\transformed\material-icons-extended-1.4.3\res
-com.nudgr.app-activity-compose-1.7.2-51 C:\Users\abhi9\.gradle\caches\transforms-3\ef6a03838be707918c602dcc5659d49f\transformed\activity-compose-1.7.2\res
-com.nudgr.app-runtime-saveable-1.4.3-52 C:\Users\abhi9\.gradle\caches\transforms-3\f1f6fcebc6dfdb611e96f2d0a6f95a61\transformed\runtime-saveable-1.4.3\res
-com.nudgr.app-core-1.10.1-53 C:\Users\abhi9\.gradle\caches\transforms-3\f219047388e7cfdc34558865480442bb\transformed\core-1.10.1\res
-com.nudgr.app-datastore-1.0.0-54 C:\Users\abhi9\.gradle\caches\transforms-3\f5a0a4fe13f9f7e9c8a4c5c5072c92dd\transformed\datastore-1.0.0\res
-com.nudgr.app-core-runtime-2.2.0-55 C:\Users\abhi9\.gradle\caches\transforms-3\f9fbcebb467e08107e020f461a5684c2\transformed\core-runtime-2.2.0\res
-com.nudgr.app-sqlite-framework-2.3.0-56 C:\Users\abhi9\.gradle\caches\transforms-3\fc1095b068e67dd3ce439c03ef92dee9\transformed\sqlite-framework-2.3.0\res
-com.nudgr.app-foundation-1.4.3-57 C:\Users\abhi9\.gradle\caches\transforms-3\fe0b5fcf49021f887e42d71c4d938906\transformed\foundation-1.4.3\res
-com.nudgr.app-ui-tooling-preview-1.4.3-58 C:\Users\abhi9\.gradle\caches\transforms-3\ffcafde0422a064ab8f48eb597f41391\transformed\ui-tooling-preview-1.4.3\res
-com.nudgr.app-resValues-59 C:\Users\abhi9\Desktop\Projects\Nudgr with zux Pilot\app\build\generated\res\resValues\debug
-com.nudgr.app-packageDebugResources-60 C:\Users\abhi9\Desktop\Projects\Nudgr with zux Pilot\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
-com.nudgr.app-packageDebugResources-61 C:\Users\abhi9\Desktop\Projects\Nudgr with zux Pilot\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
-com.nudgr.app-merged_res-62 C:\Users\abhi9\Desktop\Projects\Nudgr with zux Pilot\app\build\intermediates\merged_res\debug
-com.nudgr.app-debug-63 C:\Users\abhi9\Desktop\Projects\Nudgr with zux Pilot\app\src\debug\res
-com.nudgr.app-main-64 C:\Users\abhi9\Desktop\Projects\Nudgr with zux Pilot\app\src\main\res
+com.nudgr.app-lifecycle-viewmodel-2.6.2-0 C:\Users\abhi9\.gradle\caches\transforms-3\009890737e9faa0f678581db237eff49\transformed\lifecycle-viewmodel-2.6.2\res
+com.nudgr.app-lifecycle-runtime-ktx-2.6.2-1 C:\Users\abhi9\.gradle\caches\transforms-3\01a073b7d98e97d4aa6b8ecec6de535f\transformed\lifecycle-runtime-ktx-2.6.2\res
+com.nudgr.app-ui-test-manifest-1.4.3-2 C:\Users\abhi9\.gradle\caches\transforms-3\04fcaf7ca2fe4400f6e995aa3bd71e15\transformed\ui-test-manifest-1.4.3\res
+com.nudgr.app-core-ktx-1.10.1-3 C:\Users\abhi9\.gradle\caches\transforms-3\09aae2423c4fcb89848d1c858382ee26\transformed\core-ktx-1.10.1\res
+com.nudgr.app-lifecycle-livedata-core-2.6.2-4 C:\Users\abhi9\.gradle\caches\transforms-3\0ea30e47cfacb2f9829b331541cf242a\transformed\lifecycle-livedata-core-2.6.2\res
+com.nudgr.app-hilt-navigation-1.0.0-5 C:\Users\abhi9\.gradle\caches\transforms-3\13ff44dfbc66e4f004dc751c81a0d084\transformed\hilt-navigation-1.0.0\res
+com.nudgr.app-animation-core-1.4.3-6 C:\Users\abhi9\.gradle\caches\transforms-3\1b258150c459f13fb1b09322162ee21b\transformed\animation-core-1.4.3\res
+com.nudgr.app-ads-adservices-java-1.0.0-beta05-7 C:\Users\abhi9\.gradle\caches\transforms-3\1cf73eb7ab0d34b2829fbcb171d9249b\transformed\ads-adservices-java-1.0.0-beta05\res
+com.nudgr.app-activity-ktx-1.7.2-8 C:\Users\abhi9\.gradle\caches\transforms-3\22ef7b72e67ef00a2bb9b79dda2db7fa\transformed\activity-ktx-1.7.2\res
+com.nudgr.app-coil-base-2.4.0-9 C:\Users\abhi9\.gradle\caches\transforms-3\2a01e14bad34f59992e16b3011a954ca\transformed\coil-base-2.4.0\res
+com.nudgr.app-activity-1.7.2-10 C:\Users\abhi9\.gradle\caches\transforms-3\2d2145ef53504e4f134b2b270a5970f4\transformed\activity-1.7.2\res
+com.nudgr.app-ui-util-1.4.3-11 C:\Users\abhi9\.gradle\caches\transforms-3\2d9967a6440c87a2202fe6c8772f41cb\transformed\ui-util-1.4.3\res
+com.nudgr.app-ads-adservices-1.0.0-beta05-12 C:\Users\abhi9\.gradle\caches\transforms-3\33d0df8cdbe1178253ffd16401d7a8f1\transformed\ads-adservices-1.0.0-beta05\res
+com.nudgr.app-browser-1.4.0-13 C:\Users\abhi9\.gradle\caches\transforms-3\3c8e1655b1875950d7b3f3a0195db627\transformed\browser-1.4.0\res
+com.nudgr.app-ui-graphics-1.4.3-14 C:\Users\abhi9\.gradle\caches\transforms-3\3d8486dd31ff2019aa825a77aae93e10\transformed\ui-graphics-1.4.3\res
+com.nudgr.app-ui-tooling-preview-1.4.3-15 C:\Users\abhi9\.gradle\caches\transforms-3\3ea1f5ff5ff022433e9b660a76a7afc8\transformed\ui-tooling-preview-1.4.3\res
+com.nudgr.app-firebase-common-20.4.2-16 C:\Users\abhi9\.gradle\caches\transforms-3\3ef37e0b78355d8b8337932675ee5355\transformed\firebase-common-20.4.2\res
+com.nudgr.app-lifecycle-process-2.6.2-17 C:\Users\abhi9\.gradle\caches\transforms-3\40840b1fcc7fefafe506b7176f0bcf7d\transformed\lifecycle-process-2.6.2\res
+com.nudgr.app-navigation-common-ktx-2.6.0-18 C:\Users\abhi9\.gradle\caches\transforms-3\44ec042078d599cbf9ee56de8bbb191a\transformed\navigation-common-ktx-2.6.0\res
+com.nudgr.app-fragment-1.5.1-19 C:\Users\abhi9\.gradle\caches\transforms-3\464d2b31b04ac7a8f3bcb279b6384dfb\transformed\fragment-1.5.1\res
+com.nudgr.app-navigation-runtime-ktx-2.6.0-20 C:\Users\abhi9\.gradle\caches\transforms-3\5b7accbbcb4afdb5f8881923193fabed\transformed\navigation-runtime-ktx-2.6.0\res
+com.nudgr.app-animation-1.4.3-21 C:\Users\abhi9\.gradle\caches\transforms-3\5cb7f9b5466e3177c0d564e35c1c154a\transformed\animation-1.4.3\res
+com.nudgr.app-runtime-1.4.3-22 C:\Users\abhi9\.gradle\caches\transforms-3\5e1c5783a88f32646fff140db2eb0788\transformed\runtime-1.4.3\res
+com.nudgr.app-profileinstaller-1.3.1-23 C:\Users\abhi9\.gradle\caches\transforms-3\62b7ab11c7c20ebae4c17f80d9d75cb4\transformed\profileinstaller-1.3.1\res
+com.nudgr.app-emoji2-1.3.0-24 C:\Users\abhi9\.gradle\caches\transforms-3\666cf13ae00d1c51f046862c6ae78eb4\transformed\emoji2-1.3.0\res
+com.nudgr.app-room-ktx-2.5.0-25 C:\Users\abhi9\.gradle\caches\transforms-3\6740c5df8358a321122e8ebc47274eb9\transformed\room-ktx-2.5.0\res
+com.nudgr.app-foundation-layout-1.4.3-26 C:\Users\abhi9\.gradle\caches\transforms-3\6f3d6b36ef87ef752765975cf20ae143\transformed\foundation-layout-1.4.3\res
+com.nudgr.app-core-runtime-2.2.0-27 C:\Users\abhi9\.gradle\caches\transforms-3\70e08d30bd3bad30035dd9b0a00b66e3\transformed\core-runtime-2.2.0\res
+com.nudgr.app-ui-tooling-data-1.4.3-28 C:\Users\abhi9\.gradle\caches\transforms-3\73b34d45c9853510bc5b93bca1fa1e53\transformed\ui-tooling-data-1.4.3\res
+com.nudgr.app-ui-geometry-1.4.3-29 C:\Users\abhi9\.gradle\caches\transforms-3\75d589e69d18f4b1caf2c83834d13e10\transformed\ui-geometry-1.4.3\res
+com.nudgr.app-material-ripple-1.4.3-30 C:\Users\abhi9\.gradle\caches\transforms-3\8740a521794ff2d0cb302143700cf77d\transformed\material-ripple-1.4.3\res
+com.nudgr.app-room-runtime-2.5.0-31 C:\Users\abhi9\.gradle\caches\transforms-3\8747ac32911915c6acef08534729824b\transformed\room-runtime-2.5.0\res
+com.nudgr.app-sqlite-framework-2.3.0-32 C:\Users\abhi9\.gradle\caches\transforms-3\8acf352c6dc373d87fe0444cc260bfb1\transformed\sqlite-framework-2.3.0\res
+com.nudgr.app-navigation-common-2.6.0-33 C:\Users\abhi9\.gradle\caches\transforms-3\8eca9c56b2fa798d82f86dff061d66b7\transformed\navigation-common-2.6.0\res
+com.nudgr.app-navigation-compose-2.6.0-34 C:\Users\abhi9\.gradle\caches\transforms-3\9269bda0aaa52597819b9237344617a6\transformed\navigation-compose-2.6.0\res
+com.nudgr.app-datastore-preferences-1.0.0-35 C:\Users\abhi9\.gradle\caches\transforms-3\a054e34b4883343a9171e387899d011e\transformed\datastore-preferences-1.0.0\res
+com.nudgr.app-ui-1.4.3-36 C:\Users\abhi9\.gradle\caches\transforms-3\a24c58d64e6369407ee833ad04293a91\transformed\ui-1.4.3\res
+com.nudgr.app-play-services-measurement-api-21.5.0-37 C:\Users\abhi9\.gradle\caches\transforms-3\a762ed162c68135f0fc27dff49e5b9c3\transformed\play-services-measurement-api-21.5.0\res
+com.nudgr.app-lifecycle-viewmodel-ktx-2.6.2-38 C:\Users\abhi9\.gradle\caches\transforms-3\ae65594a4af8b9f5cb9e4d3cebcbb900\transformed\lifecycle-viewmodel-ktx-2.6.2\res
+com.nudgr.app-startup-runtime-1.1.1-39 C:\Users\abhi9\.gradle\caches\transforms-3\aea3fd601519f9891313f742171e7f69\transformed\startup-runtime-1.1.1\res
+com.nudgr.app-activity-compose-1.7.2-40 C:\Users\abhi9\.gradle\caches\transforms-3\b0312cf3f5295b3cf9ab118adaaf7836\transformed\activity-compose-1.7.2\res
+com.nudgr.app-material3-1.1.1-41 C:\Users\abhi9\.gradle\caches\transforms-3\b1772122e357609225b6d8b813dbfecb\transformed\material3-1.1.1\res
+com.nudgr.app-material-icons-core-1.4.3-42 C:\Users\abhi9\.gradle\caches\transforms-3\b3add00ba74aac1f16e5822953610a2a\transformed\material-icons-core-1.4.3\res
+com.nudgr.app-core-1.10.1-43 C:\Users\abhi9\.gradle\caches\transforms-3\b7ec18d9ab60b50361085529139ab595\transformed\core-1.10.1\res
+com.nudgr.app-material-icons-extended-1.4.3-44 C:\Users\abhi9\.gradle\caches\transforms-3\b948c8256993603c1867a018c456583a\transformed\material-icons-extended-1.4.3\res
+com.nudgr.app-navigation-runtime-2.6.0-45 C:\Users\abhi9\.gradle\caches\transforms-3\ba1cfd0cd7b269c574b5d4dd3716324f\transformed\navigation-runtime-2.6.0\res
+com.nudgr.app-ui-tooling-1.4.3-46 C:\Users\abhi9\.gradle\caches\transforms-3\bbffce063c63435e4a9b296d8529ebcc\transformed\ui-tooling-1.4.3\res
+com.nudgr.app-foundation-1.4.3-47 C:\Users\abhi9\.gradle\caches\transforms-3\be5581217bf1745d4210d45ff0881deb\transformed\foundation-1.4.3\res
+com.nudgr.app-savedstate-ktx-1.2.1-48 C:\Users\abhi9\.gradle\caches\transforms-3\c83e8c66dbbb0a240d772d5af84353ef\transformed\savedstate-ktx-1.2.1\res
+com.nudgr.app-ui-text-1.4.3-49 C:\Users\abhi9\.gradle\caches\transforms-3\c8ffee322be027bf10d6eaa0b9f39376\transformed\ui-text-1.4.3\res
+com.nudgr.app-material-1.4.3-50 C:\Users\abhi9\.gradle\caches\transforms-3\cee4cdc288a2e3bad620cd865caf1072\transformed\material-1.4.3\res
+com.nudgr.app-customview-poolingcontainer-1.0.0-51 C:\Users\abhi9\.gradle\caches\transforms-3\d0a1e6127f72d7072b245feccacb4023\transformed\customview-poolingcontainer-1.0.0\res
+com.nudgr.app-hilt-navigation-compose-1.0.0-52 C:\Users\abhi9\.gradle\caches\transforms-3\d5e8eee3b1fec999337b02d7e7e70b2c\transformed\hilt-navigation-compose-1.0.0\res
+com.nudgr.app-runtime-saveable-1.4.3-53 C:\Users\abhi9\.gradle\caches\transforms-3\d60d9107eec957961a5af86ec25ddf88\transformed\runtime-saveable-1.4.3\res
+com.nudgr.app-sqlite-2.3.0-54 C:\Users\abhi9\.gradle\caches\transforms-3\d77dd3d2b8dfccda200523a7e1f05694\transformed\sqlite-2.3.0\res
+com.nudgr.app-play-services-basement-18.1.0-55 C:\Users\abhi9\.gradle\caches\transforms-3\d842389db7e3f89679ac66a335927df3\transformed\play-services-basement-18.1.0\res
+com.nudgr.app-appcompat-resources-1.6.1-56 C:\Users\abhi9\.gradle\caches\transforms-3\dcef78fa10e0bfa23991da41d77d3ae6\transformed\appcompat-resources-1.6.1\res
+com.nudgr.app-datastore-1.0.0-57 C:\Users\abhi9\.gradle\caches\transforms-3\dd1d84c54fdaa5192e9ed3bdafe5c154\transformed\datastore-1.0.0\res
+com.nudgr.app-lifecycle-runtime-2.6.2-58 C:\Users\abhi9\.gradle\caches\transforms-3\e25397a61dc705979fc99bb6224f4fb9\transformed\lifecycle-runtime-2.6.2\res
+com.nudgr.app-lifecycle-livedata-2.6.2-59 C:\Users\abhi9\.gradle\caches\transforms-3\e5dae0f8eb8f098336fb903fc53c2d3f\transformed\lifecycle-livedata-2.6.2\res
+com.nudgr.app-play-services-base-18.0.1-60 C:\Users\abhi9\.gradle\caches\transforms-3\eeb8f44bb69003c7259c19fdd78ff4d4\transformed\play-services-base-18.0.1\res
+com.nudgr.app-savedstate-1.2.1-61 C:\Users\abhi9\.gradle\caches\transforms-3\ef770d8c0d98502a7d200a3cdbc46cea\transformed\savedstate-1.2.1\res
+com.nudgr.app-lifecycle-viewmodel-compose-2.6.2-62 C:\Users\abhi9\.gradle\caches\transforms-3\ef901983132a3b9344142edb7f6e2096\transformed\lifecycle-viewmodel-compose-2.6.2\res
+com.nudgr.app-lifecycle-viewmodel-savedstate-2.6.2-63 C:\Users\abhi9\.gradle\caches\transforms-3\f254491a0c112c277dd55bac03fed2c5\transformed\lifecycle-viewmodel-savedstate-2.6.2\res
+com.nudgr.app-annotation-experimental-1.3.0-64 C:\Users\abhi9\.gradle\caches\transforms-3\f275c5da0fe04befcb06d3cbb1bc97e2\transformed\annotation-experimental-1.3.0\res
+com.nudgr.app-ui-unit-1.4.3-65 C:\Users\abhi9\.gradle\caches\transforms-3\f7c1a5fbcb4645e979dc19a2531c0df4\transformed\ui-unit-1.4.3\res
+com.nudgr.app-res-66 C:\Users\abhi9\Desktop\Projects\Nudgr with zux Pilot\app\build\generated\crashlytics\res\debug
+com.nudgr.app-res-67 C:\Users\abhi9\Desktop\Projects\Nudgr with zux Pilot\app\build\generated\res\processDebugGoogleServices
+com.nudgr.app-resValues-68 C:\Users\abhi9\Desktop\Projects\Nudgr with zux Pilot\app\build\generated\res\resValues\debug
+com.nudgr.app-packageDebugResources-69 C:\Users\abhi9\Desktop\Projects\Nudgr with zux Pilot\app\build\intermediates\incremental\debug\packageDebugResources\merged.dir
+com.nudgr.app-packageDebugResources-70 C:\Users\abhi9\Desktop\Projects\Nudgr with zux Pilot\app\build\intermediates\incremental\debug\packageDebugResources\stripped.dir
+com.nudgr.app-merged_res-71 C:\Users\abhi9\Desktop\Projects\Nudgr with zux Pilot\app\build\intermediates\merged_res\debug
+com.nudgr.app-debug-72 C:\Users\abhi9\Desktop\Projects\Nudgr with zux Pilot\app\src\debug\res
+com.nudgr.app-main-73 C:\Users\abhi9\Desktop\Projects\Nudgr with zux Pilot\app\src\main\res
