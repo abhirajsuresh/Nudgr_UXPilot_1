@@ -2,6 +2,7 @@ package com.nudgr.ui.welcome
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nudgr.analytics.AnalyticsHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -11,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WelcomeViewModel @Inject constructor(
-    // TODO: Add analytics service when ready
+    private val analyticsHelper: AnalyticsHelper
 ) : ViewModel() {
     
     private val _uiState = MutableStateFlow(WelcomeUiState())
@@ -25,10 +26,8 @@ class WelcomeViewModel @Inject constructor(
     }
     
     fun onGuestContinue() {
-        viewModelScope.launch {
-            // TODO: Track nudgr_onboarding_step_complete with step:'auth'
-            // analytics.track("nudgr_onboarding_step_complete", mapOf("step" to "auth"))
-        }
+        analyticsHelper.trackEvent(AnalyticsHelper.Event.ONBOARDING_GUEST_CONTINUE)
+        // Future logic for guest session
     }
 }
 

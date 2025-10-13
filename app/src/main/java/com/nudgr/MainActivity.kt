@@ -17,6 +17,8 @@ import com.nudgr.ui.images.ImageLibraryScreen
 import com.nudgr.ui.timers.TimerSetupScreen
 import com.nudgr.ui.dashboard.DashboardScreen
 import com.nudgr.ui.permissions.PermissionsHubScreen
+import com.nudgr.ui.session_summary.SessionSummaryScreen
+import com.nudgr.ui.stats.StatsScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -58,6 +60,17 @@ class MainActivity : ComponentActivity() {
                         
                         composable("permissions_hub") {
                             PermissionsHubScreen(navController = navController)
+                        }
+
+                        composable("session_summary/{sessionId}") { backStackEntry ->
+                            SessionSummaryScreen(
+                                navController = navController,
+                                sessionId = backStackEntry.arguments?.getString("sessionId")
+                            )
+                        }
+                        
+                        composable("stats") {
+                            StatsScreen(navController = navController)
                         }
                     }
                 }

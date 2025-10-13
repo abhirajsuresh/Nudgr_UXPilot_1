@@ -4,6 +4,8 @@
     <color name="dark_bg">#1F1F2E</color>
     <color name="primary_accent">#464EFF</color>
     <color name="secondary_accent">#6C4EE3</color>
+    <color name="primary_accent_start">#464EFF</color>
+    <color name="primary_accent_end">#6C4EE3</color>
 
     <!-- Semantic States -->
     <color name="success">#10B981</color> <!-- green -->
@@ -25,4 +27,13 @@
     <!-- Overlay / Transparency -->
     <color name="overlay_dim">#99000000</color> <!-- 60% black -->
     <color name="white_translucent">#80FFFFFF</color> <!-- 50% white -->
+    
+    <!-- Button Colors -->
+    <color name="btn_primary_text">#FFFFFF</color>
+    <color name="btn_secondary_dark_text">#FFFFFF</color>
+    <color name="btn_secondary_dark_stroke">#4B5563</color> <!-- gray_600 -->
+    <color name="btn_secondary_light_bg">#F3F4F6</color> <!-- light gray -->
+    <color name="btn_secondary_light_text">#1F2937</color> <!-- dark gray text -->
+    <color name="btn_secondary_light_stroke">#D1D5DB</color> <!-- gray_300 -->
+    <color name="ripple_neutral">#33FFFFFF</color> <!-- 20% white -->
 </resources>

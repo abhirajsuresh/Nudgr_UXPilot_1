@@ -2,22 +2,28 @@ package com.nudgr.ui.dashboard
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nudgr.analytics.AnalyticsHelper
 import com.nudgr.data.local.entity.Session
 import com.nudgr.data.local.entity.SessionStatus
 import com.nudgr.data.repository.ImageRepository
 import com.nudgr.data.repository.SessionRepository
+import com.nudgr.data.repository.SettingsRepository
+import com.nudgr.service.SessionController
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DashboardViewModel @Inject constructor(
+    private val analyticsHelper: AnalyticsHelper,
     private val imageRepository: ImageRepository,
-    private val sessionRepository: SessionRepository
-    // TODO: Add preferences repository for timer settings
+    private val sessionRepository: SessionRepository,
+    private val settingsRepository: SettingsRepository,
+    private val sessionController: SessionController
 ) : ViewModel() {
     
     private val _uiState = MutableStateFlow(DashboardUiState())
@@ -35,7 +41,7 @@ class DashboardViewModel @Inject constructor(
             val allSessions = sessionRepository.getAllSessions()
             allSessions.collect { sessions ->
                 val totalSessions = sessions.size
-                val lastSession = sessions.firstOrNull()
+                val lastSession = sessions.firstOrNull { it.status == SessionStatus.COMPLETED }
                 
                 _uiState.value = _uiState.value.copy(
                     imageCount = imageCount,
@@ -50,40 +56,33 @@ class DashboardViewModel @Inject constructor(
     
     fun startSession() {
         viewModelScope.launch {
-            // TODO: Implement session start logic
-            // 1. Create new session record
-            // 2. Start foreground service
-            // 3. Seed shuffle bag
-            // 4. Track event
-            
-            // Placeholder
-            _uiState.value = _uiState.value.copy(sessionStatus = SessionStatus.RUNNING)
+            val durationMs = settingsRepository.durationMs.first()
+            val intervalMs = settingsRepository.intervalMs.first()
+            sessionController.startSession(durationMs, intervalMs)
+            analyticsHelper.trackEvent(AnalyticsHelper.Event.SESSION_START)
+            loadDashboardData() // Refresh state
         }
     }
     
     fun endSession() {
         viewModelScope.launch {
-            // TODO: Implement session end logic
-            // 1. Stop foreground service
-            // 2. Update session record
-            // 3. Navigate to summary
-            
-            _uiState.value = _uiState.value.copy(sessionStatus = SessionStatus.OFF)
+            sessionController.endSession()
+            analyticsHelper.trackEvent(AnalyticsHelper.Event.SESSION_END_MANUAL)
+            loadDashboardData() // Refresh state
         }
     }
     
     fun togglePause() {
         viewModelScope.launch {
             val currentStatus = _uiState.value.sessionStatus
-            val newStatus = when (currentStatus) {
-                SessionStatus.RUNNING -> SessionStatus.PAUSED
-                SessionStatus.PAUSED -> SessionStatus.RUNNING
-                else -> currentStatus
+            if (currentStatus == SessionStatus.RUNNING) {
+                sessionController.pauseSession()
+                analyticsHelper.trackEvent(AnalyticsHelper.Event.SESSION_PAUSE)
+            } else if (currentStatus == SessionStatus.PAUSED) {
+                sessionController.resumeSession()
+                analyticsHelper.trackEvent(AnalyticsHelper.Event.SESSION_RESUME)
             }
-            
-            _uiState.value = _uiState.value.copy(sessionStatus = newStatus)
-            
-            // TODO: Update session in database and track event
+            loadDashboardData() // Refresh state
         }
     }
 }

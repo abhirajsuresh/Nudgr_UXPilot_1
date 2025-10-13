@@ -58,6 +58,26 @@ class SessionController @Inject constructor(
         }
     }
     
+    fun snoozeNudge(delayMs: Long = 5 * 60 * 1000L) {
+        scope.launch {
+            val intent = Intent(context, SessionEngineService::class.java).apply {
+                putExtra("action", "snooze")
+                putExtra("snooze_delay_ms", delayMs)
+            }
+            context.startService(intent)
+        }
+    }
+    
+    fun extendSession(extensionMs: Long = 5 * 60 * 1000L) {
+        scope.launch {
+            val intent = Intent(context, SessionEngineService::class.java).apply {
+                putExtra("action", "extend")
+                putExtra("extension_ms", extensionMs)
+            }
+            context.startService(intent)
+        }
+    }
+    
     fun onScreenLocked() {
         scope.launch {
             val intent = Intent(context, SessionEngineService::class.java).apply {

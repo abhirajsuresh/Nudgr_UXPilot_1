@@ -12,7 +12,20 @@
           "package_name": "com.nudgr"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "446107304232-ge0k63prv99dmfu16ai20v4irtcgb991.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nudgr",
+            "certificate_hash": "e6045f70a1d959b9b5a9590d63180f5c5da1d2cb"
+          }
+        },
+        {
+          "client_id": "446107304232-iiu3k3acegplminn53i74dis932ugpeo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyD3cKJ-yiWvxvdx-1qDLdKIoG0empj8Om0"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "446107304232-iiu3k3acegplminn53i74dis932ugpeo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

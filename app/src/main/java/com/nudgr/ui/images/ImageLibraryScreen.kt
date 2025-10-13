@@ -33,6 +33,8 @@ import com.nudgr.core.ui.components.ButtonVariant
 import com.nudgr.core.ui.theme.NudgrColors
 import com.nudgr.core.ui.theme.NudgrGradients
 import com.nudgr.data.local.entity.Image
+import androidx.compose.foundation.combinedClickable
+import androidx.compose.material.icons.rounded.Check
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -68,205 +70,120 @@ fun ImageLibraryScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                TextButton(
-                    onClick = { navController.popBackStack() }
-                ) {
+                if (uiState.selectedImageIds.isEmpty()) {
                     Text(
-                        text = "Back",
-                        color = NudgrColors.TextSecondary,
-                        fontSize = 16.sp
+                        text = "Image Library",
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
                     )
+                } else {
+                    TextButton(onClick = { viewModel.clearSelection() }) {
+                        Text("Cancel", fontSize = 16.sp)
+                    }
                 }
-                
-                Text(
-                    text = "Image Library",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = NudgrColors.TextPrimary,
-                    letterSpacing = 0.5.sp
-                )
-                
-                TextButton(
-                    onClick = { imagePickerLauncher.launch("image/*") }
-                ) {
-                    Text(
-                        text = "Add",
-                        color = NudgrColors.Primary,
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.SemiBold
-                    )
+
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    if (uiState.selectedImageIds.isNotEmpty()) {
+                        IconButton(onClick = { viewModel.deleteSelectedImages() }) {
+                            Icon(Icons.Rounded.Delete, contentDescription = "Delete Selected", tint = NudgrColors.Error)
+                        }
+                        TextButton(onClick = { viewModel.selectAllImages() }) {
+                            Text("Select All", fontSize = 16.sp)
+                        }
+                    } else {
+                        IconButton(onClick = { imagePickerLauncher.launch("image/*") }) {
+                            Icon(Icons.Rounded.Add, contentDescription = "Add Image", tint = NudgrColors.Primary)
+                        }
+                    }
                 }
             }
-            
+
             Spacer(modifier = Modifier.height(24.dp))
             
-            // Content
-            if (uiState.images.isEmpty()) {
+            if (uiState.isLoading) {
+                Box(
+                    modifier = Modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator()
+                }
+            } else if (uiState.images.isEmpty()) {
                 // Empty state
-                EmptyState(
-                    onAddImages = { imagePickerLauncher.launch("image/*") }
-                )
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        "Your library is empty",
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    NudgrButton(
+                        text = "Add Your First Images",
+                        onClick = { imagePickerLauncher.launch("image/*") },
+                        variant = ButtonVariant.Primary
+                    )
+                }
             } else {
-                // Image grid
                 LazyVerticalGrid(
-                    columns = GridCells.Fixed(2),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                    columns = GridCells.Adaptive(minSize = 128.dp),
+                    modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
-                    modifier = Modifier.weight(1f)
+                    horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     items(uiState.images) { image ->
                         ImageCard(
                             image = image,
-                            onDelete = { viewModel.deleteImage(image) },
-                            onReplace = { /* TODO: Implement replace */ }
+                            isSelected = image.id in uiState.selectedImageIds,
+                            onToggleSelection = { viewModel.toggleImageSelection(image.id) }
                         )
                     }
                 }
             }
-            
-            Spacer(modifier = Modifier.height(24.dp))
-            
-            // Continue button
-            NudgrButton(
-                text = "Continue Setup",
-                onClick = { navController.popBackStack() },
-                modifier = Modifier.fillMaxWidth(),
-                enabled = uiState.images.isNotEmpty(),
-                variant = ButtonVariant.Primary
-            )
         }
     }
 }
 
-@Composable
-private fun EmptyState(
-    onAddImages: () -> Unit
-) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Box(
-            modifier = Modifier
-                .size(80.dp)
-                .background(
-                    brush = Brush.linearGradient(listOf(NudgrColors.Gray700, NudgrColors.Gray600)),
-                    shape = RoundedCornerShape(16.dp)
-                ),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(
-                imageVector = Icons.Rounded.Image,
-                contentDescription = null,
-                tint = NudgrColors.Gray400,
-                modifier = Modifier.size(40.dp)
-            )
-        }
-        
-        Spacer(modifier = Modifier.height(24.dp))
-        
-        Text(
-            text = "No images added yet",
-            fontSize = 18.sp,
-            fontWeight = FontWeight.SemiBold,
-            color = Color.White
-        )
-        
-        Spacer(modifier = Modifier.height(8.dp))
-        
-        Text(
-            text = "Add your first motivational images to get started",
-            fontSize = 14.sp,
-            color = NudgrColors.Gray400,
-            textAlign = androidx.compose.ui.text.style.TextAlign.Center
-        )
-        
-        Spacer(modifier = Modifier.height(32.dp))
-        
-        NudgrButton(
-            text = "Add Images",
-            onClick = onAddImages,
-            variant = ButtonVariant.Primary,
-            icon = Icons.Rounded.Add
-        )
-    }
-}
-
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun ImageCard(
     image: Image,
-    onDelete: () -> Unit,
-    onReplace: () -> Unit
+    isSelected: Boolean,
+    onToggleSelection: () -> Unit
 ) {
     Card(
         modifier = Modifier
-            .fillMaxWidth()
-            .aspectRatio(1f),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = NudgrColors.Gray800)
+            .aspectRatio(1f)
+            .combinedClickable(
+                onClick = { onToggleSelection() },
+                onLongClick = { onToggleSelection() }
+            ),
+        shape = RoundedCornerShape(16.dp)
     ) {
-        Box {
-            // Image
+        Box(contentAlignment = Alignment.Center) {
             AsyncImage(
                 model = image.filePath,
                 contentDescription = image.name,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
-            
-            // Overlay with actions
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(
-                                Color.Transparent,
-                                Color.Black.copy(alpha = 0.7f)
-                            )
-                        )
-                    )
-            )
-            
-            // Actions
-            Row(
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(12.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                IconButton(
-                    onClick = onReplace,
+            if (isSelected) {
+                Box(
                     modifier = Modifier
-                        .size(32.dp)
-                        .background(
-                            color = NudgrColors.Gray700.copy(alpha = 0.8f),
-                            shape = RoundedCornerShape(8.dp)
-                        )
+                        .fillMaxSize()
+                        .background(NudgrColors.Primary.copy(alpha = 0.5f)),
+                    contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        imageVector = Icons.Rounded.Add,
-                        contentDescription = "Replace",
+                        imageVector = Icons.Rounded.Check,
+                        contentDescription = "Selected",
                         tint = Color.White,
-                        modifier = Modifier.size(16.dp)
-                    )
-                }
-                
-                IconButton(
-                    onClick = onDelete,
-                    modifier = Modifier
-                        .size(32.dp)
-                        .background(
-                            color = NudgrColors.Error.copy(alpha = 0.8f),
-                            shape = RoundedCornerShape(8.dp)
-                        )
-                ) {
-                    Icon(
-                        imageVector = Icons.Rounded.Delete,
-                        contentDescription = "Delete",
-                        tint = Color.White,
-                        modifier = Modifier.size(16.dp)
+                        modifier = Modifier.size(48.dp)
                     )
                 }
             }
