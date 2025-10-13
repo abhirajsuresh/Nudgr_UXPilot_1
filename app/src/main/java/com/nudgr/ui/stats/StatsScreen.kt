@@ -83,7 +83,7 @@ fun StatsScreen(
             StatsCard(
                 title = "This Month",
                 stats = monthlyStats,
-                color = NudgrColors.Info
+                color = NudgrColors.Primary
             )
             
             Spacer(modifier = Modifier.height(32.dp))

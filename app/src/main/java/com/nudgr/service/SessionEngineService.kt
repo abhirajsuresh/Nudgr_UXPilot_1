@@ -127,7 +127,7 @@ class SessionEngineService : Service() {
                     if (isSessionRunning && session.status == com.nudgr.data.local.entity.SessionStatus.RUNNING) {
                         remainingTimeMs -= 250
                         timeUntilNextNudgeMs -= 250
-                        session.actualDurationMs += 250
+                        session = session.copy(actualDurationMs = session.actualDurationMs + 250)
                         
                         // Update notification with remaining time (UI update - stays at 250ms)
                         updateNotification("Session Running: ${formatTime(remainingTimeMs)}")
@@ -226,9 +226,11 @@ class SessionEngineService : Service() {
         runBlocking {
             val session = sessionRepository.getLatestSession()
             session?.let {
-                it.status = com.nudgr.data.local.entity.SessionStatus.COMPLETED
-                it.endTime = java.util.Date()
-                sessionRepository.updateSession(it)
+                val updated = it.copy(
+                    status = com.nudgr.data.local.entity.SessionStatus.COMPLETED,
+                    endTime = java.util.Date()
+                )
+                sessionRepository.updateSession(updated)
                 analyticsHelper.trackEvent(AnalyticsHelper.Event.SESSION_COMPLETE)
             }
         }
@@ -251,8 +253,8 @@ class SessionEngineService : Service() {
             val session = sessionRepository.getLatestSession()
             session?.let {
                 if (it.status == com.nudgr.data.local.entity.SessionStatus.RUNNING) {
-                    it.status = com.nudgr.data.local.entity.SessionStatus.PAUSED
-                    sessionRepository.updateSession(it)
+                    val updated = it.copy(status = com.nudgr.data.local.entity.SessionStatus.PAUSED)
+                    sessionRepository.updateSession(updated)
                     updateNotification("Session Paused")
                 }
             }
@@ -267,8 +269,8 @@ class SessionEngineService : Service() {
             val session = sessionRepository.getLatestSession()
             session?.let {
                 if (it.status == com.nudgr.data.local.entity.SessionStatus.PAUSED) {
-                    it.status = com.nudgr.data.local.entity.SessionStatus.RUNNING
-                    sessionRepository.updateSession(it)
+                    val updated = it.copy(status = com.nudgr.data.local.entity.SessionStatus.RUNNING)
+                    sessionRepository.updateSession(updated)
                     updateNotification("Session Running")
                 }
             }

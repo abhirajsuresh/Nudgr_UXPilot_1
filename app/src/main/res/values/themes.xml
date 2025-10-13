@@ -1,39 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- App-wide dark theme, Material 3, edge-to-edge -->
-    <style name="Theme.Nudgr" parent="Theme.Material3.Dark.NoActionBar">
+    <!-- App-wide dark theme, using Android base theme -->
+    <style name="Theme.Nudgr" parent="android:Theme.Material.NoActionBar">
         <!-- Edge-to-edge bars -->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
         <!-- Use dark icons? false because we have a dark background -->
-        <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowLightNavigationBar">false</item>
-
-        <!-- IMPORTANT: Do NOT use old translucent flags with M3 -->
-        <!-- Removed: android:windowTranslucentStatus / android:windowTranslucentNavigation -->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o">false</item>
 
         <!-- Cutout support for edge-to-edge on devices with notches -->
-        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+        <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="p">shortEdges</item>
 
         <!-- Disable force-dark to preserve your brand colors -->
-        <item name="android:forceDarkAllowed">false</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
 
-        <!-- Brand palette hook (optional if you have a colors.xml) -->
-        <item name="colorSurface">@color/dark_bg</item>
-        <item name="colorBackground">@color/dark_bg</item>
+        <!-- Brand colors -->
+        <item name="android:windowBackground">@color/dark_bg</item>
 
         <!-- Global typography defaults (from your Inter setup) -->
-        <item name="fontFamily">@font/inter</item>
         <item name="android:fontFamily">@font/inter</item>
-        <item name="textViewStyle">@style/Widget.Nudgr.TextView</item>
-        <item name="android:textViewStyle">@style/Widget.Nudgr.TextView</item>
-
-        <!-- Default MaterialButton style (from your button styles) -->
-        <item name="materialButtonStyle">@style/NudgrButton.Primary</item>
     </style>
 
-    <!-- Fullscreen “Reminder” screen variant -->
+    <!-- Fullscreen "Reminder" screen variant -->
     <style name="Theme.Nudgr.Reminder" parent="Theme.Nudgr">
         <!-- Solid dark background (no translucency) -->
         <item name="android:windowBackground">@color/dark_bg</item>
@@ -45,8 +35,8 @@
         <!-- Keep bars edge-to-edge and dark icons off -->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowLightNavigationBar">false</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o">false</item>
     </style>
 
 </resources>

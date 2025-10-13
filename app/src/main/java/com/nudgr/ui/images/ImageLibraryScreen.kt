@@ -114,21 +114,20 @@ fun ImageLibraryScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(16.dp),
-                    contentAlignment = Alignment.Center
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(
-                            "Your library is empty",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                        Spacer(modifier = Modifier.height(16.dp))
-                        NudgrButton(
-                            text = "Add Your First Images",
-                            onClick = { imagePickerLauncher.launch("image/*") },
-                            variant = ButtonVariant.Primary
-                        )
-                    }
+                    Text(
+                        "Your library is empty",
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    NudgrButton(
+                        text = "Add Your First Images",
+                        onClick = { imagePickerLauncher.launch("image/*") },
+                        variant = ButtonVariant.Primary
+                    )
                 }
             } else {
                 LazyVerticalGrid(

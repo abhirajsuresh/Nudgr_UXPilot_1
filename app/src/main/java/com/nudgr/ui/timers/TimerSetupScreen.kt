@@ -28,10 +28,6 @@ fun TimerSetupScreen(
 ) {
     val uiState by viewModel.uiState.collectAsState()
     
-    LaunchedEffect(Unit) {
-        viewModel.loadCurrentSettings()
-    }
-    
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -112,7 +108,7 @@ fun TimerSetupScreen(
                             Spacer(modifier = Modifier.height(8.dp))
                             OutlinedTextField(
                                 value = uiState.durationHours.toString(),
-                                onValueChange = { viewModel.updateDurationHours(it.toIntOrNull() ?: 0) },
+                                onValueChange = { viewModel.onDurationHoursChanged(it) },
                                 modifier = Modifier.width(80.dp),
                                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                                 colors = OutlinedTextFieldDefaults.colors(
